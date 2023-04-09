@@ -7,24 +7,24 @@ import { useRef } from "react";
 const navLinks = [
   {
     path: "/home",
-    display: "Home",
+    display: "Trang chủ",
   },
   {
     path: "/about",
-    display: "About",
+    display: "Về Đà Lạt Auto",
   },
   {
     path: "/cars",
-    display: "Cars",
+    display: "Siêu xe",
   },
 
   {
     path: "/blogs",
-    display: "Blog",
+    display: "Tin tức",
   },
   {
     path: "/contact",
-    display: "Contact",
+    display: "Liên hệ",
   },
 ];
 
