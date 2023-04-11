@@ -39,7 +39,7 @@ const Footer = () => {
             <div className="logo footer__logo">
               <h1>
                 <Link to="/home" className=" d-flex align-items-center gap-2">
-                  <i class="ri-car-line"></i>
+                  <i className="ri-car-line"></i>
                   <span>
                     Đà Lạt <br /> Auto
                   </span>
@@ -86,7 +86,7 @@ const Footer = () => {
               <div className="newsletter">
                 <input type="email" placeholder="Email" />
                 <span>
-                  <i class="ri-send-plane-line"></i>
+                  <i className="ri-send-plane-line"></i>
                 </span>
               </div>
             </div>
@@ -95,8 +95,8 @@ const Footer = () => {
           <Col lg="12">
             <div className="footer__bottom">
               <p className="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
-                <i class="ri-copyright-line"></i>Copyright {year}, Developed by
-                DunlokDev. All rights reserved.
+                <i className="ri-copyright-line"></i>Copyright {year}, Developed
+                by DunlokDev. All rights reserved.
               </p>
             </div>
           </Col>
