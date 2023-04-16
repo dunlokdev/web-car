@@ -14,13 +14,14 @@
   border: none;
   outline: none;
   background: #000d6b;
-  padding: 8px 0px;
+  padding: 8px 0;
 }
 
 .car__item-btn a {
   text-decoration: none;
   color: #fff;
   font-weight: 500;
+  padding: 0 20px;
 }
 
 .car__item-btn a:hover {
