@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
-import aboutImg from "../../assets/all-images/cars-img/bmw-offer.png";
+import aboutImg from "../../assets/all-images/cars-img/car-4.png";
 
 const AboutSection = ({ aboutClass }) => {
   return (
@@ -26,30 +26,9 @@ const AboutSection = ({ aboutClass }) => {
                 Porsche có hai trung tâm: Porsche Sài Gòn, thành lập vào năm
                 2008 và trung tâm […]
               </p>
-
-              <div className="about__section-item d-flex align-items-center">
-                <p className="section__description d-flex align-items-center gap-2">
-                  <i class="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
-                </p>
-
-                <p className="section__description d-flex align-items-center gap-2">
-                  <i class="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
-                </p>
-              </div>
-
-              <div className="about__section-item d-flex align-items-center">
-                <p className="section__description d-flex align-items-center gap-2">
-                  <i class="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
-                </p>
-
-                <p className="section__description d-flex align-items-center gap-2">
-                  <i class="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
-                </p>
-              </div>
+            </div>
+            <div>
+              <button className="btn">Khám phá thêm</button>
             </div>
           </Col>
 
