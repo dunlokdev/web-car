@@ -145,7 +145,7 @@ const Header = () => {
 
             <div className="nav__right">
               <div className="search__box">
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Tìm kiếm" />
                 <span>
                   <i className="ri-search-line"></i>
                 </span>
