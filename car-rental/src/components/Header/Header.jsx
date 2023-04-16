@@ -6,7 +6,7 @@ import { useRef } from "react";
 // Routes
 const navLinks = [
   {
-    path: "/home",
+    path: "/",
     display: "Trang chủ",
   },
   {
@@ -71,7 +71,7 @@ const Header = () => {
             <Col lg="4" md="3" sm="4">
               <div className="logo">
                 <h1>
-                  <Link to="/home" className=" d-flex align-items-center gap-2">
+                  <Link to="/" className=" d-flex align-items-center gap-2">
                     <i className="ri-car-line"></i>
                     <span>
                       Đà Lạt <br /> Auto
@@ -124,7 +124,7 @@ const Header = () => {
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
-              <i class="ri-menu-line" onClick={toggleMenu}></i>
+              <i className="ri-menu-line" onClick={toggleMenu}></i>
             </span>
 
             <div className="navigation" ref={menuRef} onClick={toggleMenu}>
@@ -147,7 +147,7 @@ const Header = () => {
               <div className="search__box">
                 <input type="text" placeholder="Search" />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
             </div>
