@@ -49,7 +49,7 @@
 }
 
 .logo h1 a span {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .logo h1 a i {
@@ -79,6 +79,7 @@
 
 .header__location-content h6 {
   font-weight: 600;
+  font-size: 1rem;
 }
 
 .header__btn {

@@ -14,7 +14,7 @@ const AboutSection = ({ aboutClass }) => {
       }
     >
       <Container>
-        <Row>
+        <Row className="align-items-center">
           <Col lg="6" md="6">
             <div className="about__section-content">
               <h4 className="section__subtitle">Về chúng tôi</h4>

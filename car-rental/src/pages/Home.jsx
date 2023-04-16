@@ -4,16 +4,18 @@ import AboutSection from "../components/UI/AboutSection";
 import HeroSlider from "../components/UI/HeroSlider";
 import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
+import BlogList from "../components/UI/BlogList";
 
 const Home = () => {
   return (
     <div>
       <Helmet title="Home">
+        {/* =========== slider section ============= */}
         <section className="p-0 hero__slider-section">
           <HeroSlider />
         </section>
 
-        {/* About section */}
+        {/* =========== About section =========== */}
         <AboutSection />
 
         {/* =========== car offer section ============= */}
@@ -28,6 +30,21 @@ const Home = () => {
               {carData.slice(0, 6).map((item) => (
                 <CarItem item={item} key={item.id} />
               ))}
+            </Row>
+          </Container>
+        </section>
+
+        <section>
+          <Container>
+            <Row>
+              <Col lg="12" className="mb-5 text-center">
+                <h6 className="section__subtitle">
+                  Khám phá Blog của chúng tôi
+                </h6>
+                <h2 className="section__title">Blog mới nhất</h2>
+              </Col>
+
+              <BlogList />
             </Row>
           </Container>
         </section>
