@@ -5,6 +5,7 @@ import HeroSlider from "../components/UI/HeroSlider";
 import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
 import BlogList from "../components/UI/BlogList";
+import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 
 const Home = () => {
   return (
@@ -33,6 +34,9 @@ const Home = () => {
             </Row>
           </Container>
         </section>
+
+        {/* =========== adv section ============= */}
+        <BecomeDriverSection />
 
         {/* =========== blog section ============= */}
         <section>

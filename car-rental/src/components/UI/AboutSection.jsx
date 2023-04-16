@@ -27,8 +27,28 @@ const AboutSection = ({ aboutClass }) => {
                 2008 và trung tâm […]
               </p>
             </div>
-            <div className="about__section-more">
-              <button className="btn">Khám phá thêm</button>
+            <div className="about__section-item d-flex align-items-center">
+              <p className="section__description d-flex align-items-center gap-2">
+                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
+                sit amet.
+              </p>
+
+              <p className="section__description d-flex align-items-center gap-2">
+                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
+                sit amet.
+              </p>
+            </div>
+
+            <div className="about__section-item d-flex align-items-center">
+              <p className="section__description d-flex align-items-center gap-2">
+                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
+                sit amet.
+              </p>
+
+              <p className="section__description d-flex align-items-center gap-2">
+                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
+                sit amet.
+              </p>
             </div>
           </Col>
 
