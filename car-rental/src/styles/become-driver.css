@@ -13,27 +13,14 @@
   font-weight: 600;
 }
 
-.become__driver-title {
-  color: #fff;
-}
-
-.become__driver-title .primary {
-  display: block;
-  margin-bottom: 25px;
+.become__driver .become__driver-title {
   font-size: 2.8rem;
-  color: #f9a826;
-}
-.become__driver-title .sub {
-  display: block;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  text-align: justify;
-  font-weight: normal;
   color: #fff;
+  line-height: 65px;
 }
 
 @media only screen and (max-width: 992px) {
-  .become__driver-title {
+  .become__driver .become__driver-title {
     font-size: 1.5rem;
     line-height: 3rem;
   }
@@ -44,7 +31,7 @@
     padding: 50px 0px;
   }
 
-  .become__driver-title {
+  .become__driver .become__driver-title {
     font-size: 1.3rem;
     line-height: 2.5rem;
   }

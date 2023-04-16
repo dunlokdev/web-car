@@ -25,13 +25,31 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .section__subtitle,
+  .section__title {
+    text-align: center;
+  }
+  .section__title {
+    margin-bottom: 1rem;
+  }
   .about__img {
-    margin-top: 30px;
+    display: none;
   }
 }
 
 @media only screen and (max-width: 576px) {
   .about__section {
     margin-top: 280px;
+  }
+  .section__subtitle,
+  .section__title {
+    text-align: center;
+  }
+
+  .section__title {
+    margin-bottom: 1rem;
+  }
+  .about__img {
+    display: none;
   }
 }
