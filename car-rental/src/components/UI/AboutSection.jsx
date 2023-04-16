@@ -27,7 +27,7 @@ const AboutSection = ({ aboutClass }) => {
                 2008 và trung tâm […]
               </p>
             </div>
-            <div>
+            <div className="about__section-more">
               <button className="btn">Khám phá thêm</button>
             </div>
           </Col>

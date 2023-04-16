@@ -34,6 +34,7 @@ const Home = () => {
           </Container>
         </section>
 
+        {/* =========== blog section ============= */}
         <section>
           <Container>
             <Row>
@@ -43,7 +44,6 @@ const Home = () => {
                 </h6>
                 <h2 className="section__title">Blog mới nhất</h2>
               </Col>
-
               <BlogList />
             </Row>
           </Container>
