@@ -1,12 +1,12 @@
 // import all images from assets/images directory
-import img01 from "../all-images/cars-img/nissan-offer.png";
-import img02 from "../all-images/cars-img/offer-toyota.png";
-import img03 from "../all-images/cars-img/bmw-offer.png";
-import img04 from "../all-images/cars-img/nissan-offer.png";
-import img05 from "../all-images/cars-img/offer-toyota.png";
-import img06 from "../all-images/cars-img/mercedes-offer.png";
-import img07 from "../all-images/cars-img/toyota-offer-2.png";
-import img08 from "../all-images/cars-img/mercedes-offer.png";
+import img01 from "../all-images/cars-img/car_1.png";
+import img02 from "../all-images/cars-img/car-2.png";
+import img03 from "../all-images/cars-img/car-3.png";
+import img04 from "../all-images/cars-img/car-4.png";
+import img05 from "../all-images/cars-img/car-5.png";
+import img06 from "../all-images/cars-img/car-6.png";
+import img07 from "../all-images/cars-img/car-7.png";
+import img08 from "../all-images/cars-img/car-8.png";
 
 const carData = [
   {
