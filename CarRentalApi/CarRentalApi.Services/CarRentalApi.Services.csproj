@@ -3,12 +3,18 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CarRentalApi.Core\CarRentalApi.Core.csproj" />
     <ProjectReference Include="..\CarRentalApi.Data\CarRentalApi.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Media\" />
+    <Folder Include="Products\" />
   </ItemGroup>
 
 </Project>
