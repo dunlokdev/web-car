@@ -21,5 +21,7 @@ namespace CarRentalApi.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public IList<Galery> Galery { get; set; }
+        public Model Model { get; set; }
+        public IList<OrderDetails> OrderDetails { get; set; }
     }
 }
