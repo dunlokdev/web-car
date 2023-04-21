@@ -8,10 +8,18 @@ import Blog from "../pages/Blog";
 import BlogDetails from "../pages/BlogDetails";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
+import Dashboard from '../pages/Dashboard';
+import Bookings from '../pages/Bookings';
+import SellCar from '../pages/SellCar';
+import Settings from '../pages/Setting';
 
 const Routers = () => {
   return (
     <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/bookings" element={<Bookings />} />
+      <Route path="/sellcar" element={<SellCar />} />
+      <Route path="/settings" element={<Settings />} /> 
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
