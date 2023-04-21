@@ -18,22 +18,16 @@ namespace CarRentalApi.Services.Cars
 
         private IQueryable<Car> FilterCar(CarQuery condition)
         {
-            //public int ModelId { get; set; }
-            //public string Name { get; set; }
-            //public double Price { get; set; }
-            //public string Description { get; set; }
-            //public string UrlSlug { get; set; }
-            //public bool IsActived { get; set; }
-
-        IQueryable<Car> carList = _context.Set<Car>()
-                .Include(x => x.Model)
-                .Include(x => x.Galery)
-                .Include(x => x.OrderDetails);
+            IQueryable<Car> carList = _context.Set<Car>()
+                  .Include(x => x.Model)
+                  .Include(x => x.Galery)
+                  .Include(x => x.OrderDetails);
 
             if (condition.IsActived)
             {
                 carList = carList.Where(x => x.IsActived);
-            } else
+            }
+            else
             {
                 carList = carList.Where(x => !x.IsActived);
             }
@@ -71,7 +65,7 @@ namespace CarRentalApi.Services.Cars
         public async Task<IPagedList<T>> GetPagedCarsQueryAsync<T>(
             Func<IQueryable<Car>,
                 IQueryable<T>> mapper,
-            CarQuery query, 
+            CarQuery query,
             IPagingParams pagingParams,
             CancellationToken cancellationToken = default)
         {
@@ -88,6 +82,20 @@ namespace CarRentalApi.Services.Cars
                 pageNumber, pageSize,
                 nameof(Car.CreatedAt), "DESC",
                 cancellationToken);
+        }
+
+        public async Task<Car> GetCarByIdAsync(int carId, bool isIncludeDetail = false, CancellationToken cancellationToken = default)
+        {
+            if (isIncludeDetail)
+            {
+                return await _context.Set<Car>().FindAsync(carId);
+            }
+
+            return await _context.Set<Car>()
+                .Include(x => x.Model)
+                .Include(x => x.Galery)
+                .Include(x => x.OrderDetails)
+                .FirstOrDefaultAsync(x => x.Id == carId, cancellationToken);
         }
     }
 }

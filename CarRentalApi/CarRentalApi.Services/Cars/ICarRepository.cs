@@ -18,5 +18,10 @@ namespace CarRentalApi.Services.Cars
             int pageNumber = 1,
             int pageSize = 10,
             CancellationToken cancellationToken = default);
+
+        Task<Car> GetCarByIdAsync(
+            int carId,
+            bool isIncludeDetail,
+            CancellationToken cancellationToken = default);
     }
 }

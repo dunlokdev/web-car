@@ -7,6 +7,7 @@ using Mapster;
 using CarRentalApi.Core.Collections;
 using CarRentalApi.WebApi.Models;
 using CarRentalApi.WebApi.Models.Car;
+using System.Net;
 
 namespace CarRentalApi.WebApi.Endpoints
 {
@@ -20,7 +21,24 @@ namespace CarRentalApi.WebApi.Endpoints
                 .WithName("GetCarsPagination")
                 .Produces<ApiResponse<CarDto>>();
 
+            routeGroupBuilder.MapGet("{id:int}", GetCarById)
+                .WithName("GetCarById")
+                .Produces<ApiResponse<CarDetail>>();
+
+
             return app;
+        }
+
+        private static async Task<IResult> GetCarById(
+            int id,
+            IMapper mapper,
+            ICarRepository repository)
+        {
+            var car = await repository.GetCarByIdAsync(id, true);
+
+            return car != null 
+                ? Results.Ok(ApiResponse.Success(mapper.Map<CarDetail>(car))) 
+                : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có mã số = {id}"));
         }
 
         private static async Task<IResult> GetCarsPagination(
@@ -29,7 +47,8 @@ namespace CarRentalApi.WebApi.Endpoints
             ICarRepository repository,
             IMapper mapper)
         {
-            if (filter.IsActived == null) { 
+            if (filter.IsActived == null)
+            {
                 filter.IsActived = true;
             }
 
