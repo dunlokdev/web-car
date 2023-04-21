@@ -13,12 +13,19 @@ namespace CarRentalApi.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Galery> builder)
         {
-            builder.ToTable("Galerys");
+            builder.ToTable("Galeries");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Thumbnail)
+                .IsRequired()
                 .HasMaxLength(500);
+
+            builder.HasOne(x => x.Car)
+                .WithMany(x => x.Galery)
+                .HasForeignKey(x => x.CarId)
+                .HasConstraintName("Fk_Galeries_Cars")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

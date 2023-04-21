@@ -23,7 +23,7 @@ namespace CarRentalApi.Data.Mappings
 
             builder.Property(x => x.UrlSlug)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(250);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace CarRentalApi.Core.Entities
         public int Id { get; set; }
         public int CarId { get; set; }
         public string Thumbnail { get; set; }
+        public Car Car { get; set; } 
     }
 }

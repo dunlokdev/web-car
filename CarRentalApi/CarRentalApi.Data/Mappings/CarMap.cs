@@ -47,10 +47,12 @@ namespace CarRentalApi.Data.Mappings
             builder.Property(x => x.Thumbnail)
                 .HasMaxLength(500);
 
-            builder.Property(x => x.Description);
+            builder.Property(x => x.Description)
+                .HasMaxLength(5000)
+                .IsRequired();
 
             builder.Property(x => x.UrlSlug)
-                .HasMaxLength(100)
+                .HasMaxLength(250)
                 .IsRequired();
 
             builder.Property(x => x.IsActived)
@@ -58,25 +60,16 @@ namespace CarRentalApi.Data.Mappings
                 .HasDefaultValue(false);
 
             builder.Property(x => x.CreatedAt)
-                .HasColumnType("datetime")
-                .IsRequired();
+                .HasColumnType("datetime");
 
             builder.Property(x => x.UpdatedAt)
-                .HasColumnType("datetime")
-                .IsRequired();
+                .HasColumnType("datetime");
 
             builder.HasOne(x => x.Model)
                 .WithMany(x => x.CarList)
                 .HasForeignKey(x => x.ModelId)
                 .HasConstraintName("Fk_Cars_Models")
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(x => x.OrderDetails)
-                .WithOne(x => x.Car)
-                .HasForeignKey(x => x.CarId)
-                .HasConstraintName("Fk_Cars_OrderDetails")
-                .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }

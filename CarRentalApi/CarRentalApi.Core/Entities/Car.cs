@@ -19,7 +19,7 @@ namespace CarRentalApi.Core.Entities
         public string UrlSlug { get; set; }
         public bool IsActived { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public IList<Galery> Galery { get; set; }
         public Model Model { get; set; }
         public IList<OrderDetails> OrderDetails { get; set; }
