@@ -23,11 +23,11 @@ namespace CarRentalApi.WebApi.Endpoints
 
             routeGroupBuilder.MapGet("{id:int}", GetCarById)
                            .WithName("GetCarById")
-                           .Produces<ApiResponse<CarDetail>>();
+                           .Produces<ApiResponse<CarDto>>();
 
             routeGroupBuilder.MapGet("/slug/{slug:regex(^[a-z0-9_-]+$)}", GetCarBySlug)
                            .WithName("GetCarBySlug")
-                           .Produces<ApiResponse<CarDetail>>();
+                           .Produces<ApiResponse<CarDto>>();
 
             return app;
         }
@@ -40,7 +40,7 @@ namespace CarRentalApi.WebApi.Endpoints
             var car = await repository.GetCarByIdAsync(id, true);
 
             return car != null
-                ? Results.Ok(ApiResponse.Success(mapper.Map<CarDetail>(car)))
+                ? Results.Ok(ApiResponse.Success(mapper.Map<CarDto>(car)))
                 : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có mã số = {id}"));
         }
 
@@ -52,7 +52,7 @@ namespace CarRentalApi.WebApi.Endpoints
             var car = await repository.GetCarBySlugAsync(slug, true);
 
             return car != null
-                ? Results.Ok(ApiResponse.Success(mapper.Map<CarDetail>(car)))
+                ? Results.Ok(ApiResponse.Success(mapper.Map<CarDto>(car)))
                 : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có slug = {slug}"));
         }
 

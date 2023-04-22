@@ -31,7 +31,7 @@ const CarDetails = () => {
         <Container>
           <Row>
             <Col lg="6">
-              <img src={img01} alt="" className="w-100" />
+              <img src={car?.thumbnail} alt="" className="w-100" />
             </Col>
 
             <Col lg="6">
@@ -51,7 +51,7 @@ const CarDetails = () => {
                       <i className="ri-star-s-fill"></i>
                       <i className="ri-star-s-fill"></i>
                     </span>
-                    ({} ratings)
+                    ({car?.evaluate} ratings)
                   </span>
                 </div>
 
@@ -66,7 +66,7 @@ const CarDetails = () => {
                       className="ri-roadster-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {car?.model?.name}
+                    Loại xe - {car?.model}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -74,7 +74,7 @@ const CarDetails = () => {
                       className="ri-settings-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {}
+                    Tự động
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -82,12 +82,12 @@ const CarDetails = () => {
                       className="ri-timer-flash-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {}
+                    {car?.speedUp} giây
                   </span>
                 </div>
 
                 <div
-                  className=" d-flex align-items-center mt-3"
+                  className=" d-flex align-items-start mt-3 flex-column"
                   style={{ columnGap: "2.8rem" }}
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -95,7 +95,7 @@ const CarDetails = () => {
                       className="ri-map-pin-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {}
+                    Công suất đến {car?.wattage} PS / 300 kW
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -103,7 +103,7 @@ const CarDetails = () => {
                       className="ri-wheelchair-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {}
+                    Mô men xoắn cực đại - {car?.torque} Nm
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -111,7 +111,7 @@ const CarDetails = () => {
                       className="ri-building-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {}
+                    Tốc độ tối đa - {car?.maxSpeed} km/h
                   </span>
                 </div>
               </div>
