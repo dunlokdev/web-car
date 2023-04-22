@@ -1,4 +1,5 @@
 ﻿using CarRentalApi.Core.Entities;
+using CarRentalApi.WebApi.Models.Model;
 
 namespace CarRentalApi.WebApi.Models.Car
 {
@@ -14,6 +15,6 @@ namespace CarRentalApi.WebApi.Models.Car
         public bool IsActived { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public Model Model { get; set; }
+        public ModelDto Model { get; set; }
     }
 }

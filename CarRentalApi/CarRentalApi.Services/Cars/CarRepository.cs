@@ -86,7 +86,7 @@ namespace CarRentalApi.Services.Cars
 
         public async Task<Car> GetCarByIdAsync(int carId, bool isIncludeDetail = false, CancellationToken cancellationToken = default)
         {
-            if (isIncludeDetail)
+            if (!isIncludeDetail)
             {
                 return await _context.Set<Car>().FindAsync(carId);
             }
@@ -96,6 +96,20 @@ namespace CarRentalApi.Services.Cars
                 .Include(x => x.Galery)
                 .Include(x => x.OrderDetails)
                 .FirstOrDefaultAsync(x => x.Id == carId, cancellationToken);
+        }
+
+        public async Task<Car> GetCarBySlugAsync(string slug, bool isIncludeDetail, CancellationToken cancellationToken = default)
+        {
+            if (!isIncludeDetail)
+            {
+                return await _context.Set<Car>().FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
+            }
+
+            return await _context.Set<Car>()
+                .Include(x => x.Model)
+                .Include(x => x.Galery)
+                .Include(x => x.OrderDetails)
+                .FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
         }
     }
 }

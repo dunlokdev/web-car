@@ -23,5 +23,10 @@ namespace CarRentalApi.Services.Cars
             int carId,
             bool isIncludeDetail,
             CancellationToken cancellationToken = default);
+
+        Task<Car> GetCarBySlugAsync(
+            string slug ,
+            bool isIncludeDetail,
+            CancellationToken cancellationToken = default);
     }
 }

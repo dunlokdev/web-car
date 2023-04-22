@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
+import carsApi from "../api/carsApi";
 
 const CarListing = () => {
+  // State
+  const [carList, setCarList] = useState([]);
+  const [filters, setFilters] = useState({
+    PageSize: 10,
+    PageNumber: 1,
+  });
+
+  // Effect
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await carsApi.getAll(filters);
+        setCarList(data.result.items);
+      } catch (error) {}
+    })();
+  }, [filters]);
+
   return (
     <Helmet title="Cars">
       <CommonSection title="Car Listing" />
@@ -27,7 +45,7 @@ const CarListing = () => {
               </div>
             </Col>
 
-            {carData.map((item) => (
+            {carList.map((item, index) => (
               <CarItem item={item} key={item.id} />
             ))}
           </Row>

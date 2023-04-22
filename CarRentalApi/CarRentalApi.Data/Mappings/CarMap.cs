@@ -47,6 +47,10 @@ namespace CarRentalApi.Data.Mappings
             builder.Property(x => x.Thumbnail)
                 .HasMaxLength(500);
 
+            builder.Property(x => x.ShortDescripton)
+                .HasMaxLength(2000)
+                .IsRequired();
+
             builder.Property(x => x.Description)
                 .HasMaxLength(5000)
                 .IsRequired();
@@ -57,7 +61,30 @@ namespace CarRentalApi.Data.Mappings
 
             builder.Property(x => x.IsActived)
                 .IsRequired()
-                .HasDefaultValue(false);
+                .HasDefaultValue(true);
+
+            builder.Property(x => x.Wattage)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            builder.Property(x => x.Torque)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            builder.Property(x => x.SpeedUp)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+
+            builder.Property(x => x.MaxSpeed)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            builder.Property(x => x.Consume)
+                .HasDefaultValue(0);
+
+            builder.Property(x => x.Emission)
+                .HasDefaultValue(0);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("datetime");

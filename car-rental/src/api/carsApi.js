@@ -1,10 +1,18 @@
 import axiosClient from "./axiosClient";
 
-const postApi = {
-  getAll(params) {},
+const carsApi = {
+  getAll(params) {
+    const url = "/cars";
+    return axiosClient.get(url, { params });
+  },
 
   getById(id) {
     const url = `/cars/${id}`;
+    return axiosClient.get(url);
+  },
+
+  getBySlug(slug) {
+    const url = `/cars/slug/${slug}`;
     return axiosClient.get(url);
   },
 
@@ -15,4 +23,4 @@ const postApi = {
   remove(id) {},
 };
 
-export default postApi;
+export default carsApi;
