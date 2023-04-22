@@ -1,6 +1,6 @@
 ﻿using CarRentalApi.Core.DTO;
 using CarRentalApi.Core.Entities;
-using CarRentalApi.Services.Cars;
+using CarRentalApi.Services.Repository;
 using CarRentalApi.WebApi.Models.Cars;
 using MapsterMapper;
 using Mapster;
@@ -19,7 +19,7 @@ namespace CarRentalApi.WebApi.Endpoints
 
             routeGroupBuilder.MapGet("/", GetCarsPagination)
                            .WithName("GetCarsPagination")
-                           .Produces<ApiResponse<CarDto>>();
+                           .Produces<ApiResponse<PaginationResult<CarDto>>>();
 
             routeGroupBuilder.MapGet("{id:int}", GetCarById)
                            .WithName("GetCarById")

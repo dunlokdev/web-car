@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRentalApi.Core.Contracts;
 using CarRentalApi.Services.Extentions;
 
-namespace CarRentalApi.Services.Cars
+namespace CarRentalApi.Services.Repository
 {
     public class CarRepository : ICarRepository
     {
@@ -30,6 +30,11 @@ namespace CarRentalApi.Services.Cars
             else
             {
                 carList = carList.Where(x => !x.IsActived);
+            }
+
+            if (condition.ModelSlug != null)
+            {
+                carList = carList.Where(x => x.Model.UrlSlug == condition.ModelSlug);
             }
 
             if (condition.ModelId > 0)

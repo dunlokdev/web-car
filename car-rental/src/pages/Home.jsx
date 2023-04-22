@@ -1,19 +1,18 @@
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
+import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
 import AboutSection from "../components/UI/AboutSection";
-import HeroSlider from "../components/UI/HeroSlider";
-import CarItem from "../components/UI/CarItem";
-import carData from "../assets/data/carData";
-import BlogList from "../components/UI/BlogList";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
-import { useEffect, useState } from "react";
-import carsApi from "../api/carsApi";
+import BlogList from "../components/UI/BlogList";
+import CarItem from "../components/UI/CarItem";
+import HeroSlider from "../components/UI/HeroSlider";
 
 const Home = () => {
   // State
   const [carList, setCarList] = useState([]);
   const [filters, setFilters] = useState({
-    PageSize: 10,
+    PageSize: 6,
     PageNumber: 1,
   });
 
@@ -46,11 +45,6 @@ const Home = () => {
                 <h6 className="section__subtitle">Tận hưởng</h6>
                 <h2 className="section__title">Các dòng Porche</h2>
               </Col>
-
-              {/* {carData.slice(0, 6).map((item) => (
-                <CarItem item={item} key={item.id} />
-              ))} */}
-
               {carList.map((item, index) => (
                 <CarItem item={item} key={item.id} />
               ))}

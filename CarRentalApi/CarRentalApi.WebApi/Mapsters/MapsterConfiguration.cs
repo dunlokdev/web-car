@@ -10,6 +10,7 @@ namespace TatBlog.WebApi.Mapsters
     {
         public void Register(TypeAdapterConfig config)
         {
+            // Mapping Car Model
             config.NewConfig<CarFilterModel, CarQuery>();
             config.NewConfig<Car, CarDto>()
                 .Map(dst => dst.Model, src => src.Model.Name);

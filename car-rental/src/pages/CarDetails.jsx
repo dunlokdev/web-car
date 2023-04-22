@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import img01 from "../assets/all-images/cars-img/car-6.png";
 import { GetCurrency } from "../Utils/common";
 import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
-import BookingForm from "../components/UI/BookingForm";
-import PaymentMethod from "../components/UI/PaymentMethod";
 
 const CarDetails = () => {
   const { slug } = useParams();
@@ -113,7 +110,7 @@ const CarDetails = () => {
               </div>
             </Col>
 
-            <Col lg="7" className="mt-5">
+            {/* <Col lg="7" className="mt-5">
               <div className="booking-info mt-5">
                 <h5 className="mb-4 fw-bold ">Booking Information</h5>
                 <BookingForm />
@@ -125,7 +122,7 @@ const CarDetails = () => {
                 <h5 className="mb-4 fw-bold ">Payment Information</h5>
                 <PaymentMethod />
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </section>
