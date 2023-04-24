@@ -152,6 +152,10 @@ namespace CarRentalApi.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Thumbnail")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("UrlSlug")
                         .IsRequired()
                         .HasMaxLength(250)

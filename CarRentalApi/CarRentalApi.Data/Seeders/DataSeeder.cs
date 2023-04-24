@@ -205,22 +205,28 @@ namespace CarRentalApi.Data.Seeders
                  new() {
                     Name = "718",
                     UrlSlug = "718",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/models/718.png"
                  },
                  new() {
                     Name = "911",
                     UrlSlug = "911",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/models/911.png"
+
                  },
                  new() {
                     Name = "Taycan",
                     UrlSlug = "taycan",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/models/taycan.png"
                  },
                  new() {
                     Name = "Panamera",
                     UrlSlug = "panamera",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/models/panamera.png"
                  },
                  new() {
                     Name = "Macan",
                     UrlSlug = "macan",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/models/macan.png"
                  },
             };
 

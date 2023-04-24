@@ -1,0 +1,42 @@
+.model__list {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.model__item {
+  position: relative;
+  width: calc(100% / 5);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.model__item img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: all 0.3s linear;
+}
+
+.model__item img:hover {
+  transform: scale(1.1);
+}
+
+.model__item span {
+  position: absolute;
+  left: 36px;
+  bottom: 24px;
+  font-size: 22px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 992px) {
+  .model__item {
+    width: calc(100% / 3);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .model__item {
+    width: calc(100% / 2);
+  }
+}

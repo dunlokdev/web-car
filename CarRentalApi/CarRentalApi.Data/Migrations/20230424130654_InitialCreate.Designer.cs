@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Data.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20230422033130_InitialCreate")]
+    [Migration("20230424130654_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -154,6 +154,10 @@ namespace CarRentalApi.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Thumbnail")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("UrlSlug")
                         .IsRequired()
