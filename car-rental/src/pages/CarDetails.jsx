@@ -1,37 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import carData from "../assets/data/carData";
-import { Container, Row, Col } from "reactstrap";
-import Helmet from "../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
+import img01 from "../assets/all-images/cars-img/car-6.png";
+import { GetCurrency } from "../Utils/common";
+import carsApi from "../api/carsApi";
+import Helmet from "../components/Helmet/Helmet";
 import BookingForm from "../components/UI/BookingForm";
 import PaymentMethod from "../components/UI/PaymentMethod";
 
 const CarDetails = () => {
   const { slug } = useParams();
 
-  const singleCarItem = carData.find((item) => item.carName === slug);
+  const [car, setCar] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [singleCarItem]);
+    (async () => {
+      try {
+        const data = await carsApi.getBySlug(slug);
+        setCar(data.result);
+        console.log("data.result: ", data.result);
+      } catch (error) {}
+    })();
+  }, [slug]);
 
   return (
-    <Helmet title={singleCarItem.carName}>
+    <Helmet title={car?.name}>
       <section>
         <Container>
           <Row>
             <Col lg="6">
-              <img src={singleCarItem.imgUrl} alt="" className="w-100" />
+              <img src={car?.thumbnail} alt="" className="w-100" />
             </Col>
 
             <Col lg="6">
               <div className="car__info">
-                <h2 className="section__title">{singleCarItem.carName}</h2>
+                <h2 className="section__title">{car?.name}</h2>
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${singleCarItem.price}.00 / Day
+                    ${GetCurrency(car?.price)}
                   </h6>
 
                   <span className=" d-flex align-items-center gap-2">
@@ -42,13 +51,11 @@ const CarDetails = () => {
                       <i className="ri-star-s-fill"></i>
                       <i className="ri-star-s-fill"></i>
                     </span>
-                    ({singleCarItem.rating} ratings)
+                    ({car?.evaluate} ratings)
                   </span>
                 </div>
 
-                <p className="section__description">
-                  {singleCarItem.description}
-                </p>
+                <p className="section__description">{car?.description}</p>
 
                 <div
                   className=" d-flex align-items-center mt-3"
@@ -59,7 +66,7 @@ const CarDetails = () => {
                       className="ri-roadster-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.model}
+                    Loại xe - {car?.model}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -67,7 +74,7 @@ const CarDetails = () => {
                       className="ri-settings-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.automatic}
+                    Tự động
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -75,12 +82,12 @@ const CarDetails = () => {
                       className="ri-timer-flash-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.speed}
+                    {car?.speedUp} giây
                   </span>
                 </div>
 
                 <div
-                  className=" d-flex align-items-center mt-3"
+                  className=" d-flex align-items-start mt-3 flex-column"
                   style={{ columnGap: "2.8rem" }}
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -88,7 +95,7 @@ const CarDetails = () => {
                       className="ri-map-pin-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.gps}
+                    Công suất đến {car?.wattage} PS / 300 kW
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -96,7 +103,7 @@ const CarDetails = () => {
                       className="ri-wheelchair-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.seatType}
+                    Mô men xoắn cực đại - {car?.torque} Nm
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -104,7 +111,7 @@ const CarDetails = () => {
                       className="ri-building-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.brand}
+                    Tốc độ tối đa - {car?.maxSpeed} km/h
                   </span>
                 </div>
               </div>

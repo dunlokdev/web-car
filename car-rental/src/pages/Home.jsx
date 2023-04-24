@@ -6,8 +6,27 @@ import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
 import BlogList from "../components/UI/BlogList";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
+import { useEffect, useState } from "react";
+import carsApi from "../api/carsApi";
 
 const Home = () => {
+  // State
+  const [carList, setCarList] = useState([]);
+  const [filters, setFilters] = useState({
+    PageSize: 10,
+    PageNumber: 1,
+  });
+
+  // Effect
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await carsApi.getAll(filters);
+        setCarList(data.result.items);
+      } catch (error) {}
+    })();
+  }, [filters]);
+
   return (
     <div>
       <Helmet title="Home">
@@ -28,7 +47,11 @@ const Home = () => {
                 <h2 className="section__title">Các dòng Porche</h2>
               </Col>
 
-              {carData.slice(0, 6).map((item) => (
+              {/* {carData.slice(0, 6).map((item) => (
+                <CarItem item={item} key={item.id} />
+              ))} */}
+
+              {carList.map((item, index) => (
                 <CarItem item={item} key={item.id} />
               ))}
             </Row>

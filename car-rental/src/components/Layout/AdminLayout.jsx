@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../styles/admin-layout.css";
-import SideBar from "../dashboard/SideBar";
+import SideBar from "../Dashboard/SideBar";
 import { FaBars } from "react-icons/fa";
 
 const AdminLayout = () => {
