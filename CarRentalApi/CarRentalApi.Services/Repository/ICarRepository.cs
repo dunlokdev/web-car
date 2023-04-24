@@ -2,7 +2,7 @@
 using CarRentalApi.Core.Contracts;
 using CarRentalApi.Core.DTO;
 
-namespace CarRentalApi.Services.Cars
+namespace CarRentalApi.Services.Repository
 {
     public interface ICarRepository
     {

@@ -27,27 +27,25 @@ const AboutSection = ({ aboutClass }) => {
                 2008 và trung tâm […]
               </p>
             </div>
-            <div className="about__section-item d-flex align-items-center">
+            <div className="about__section-item d-flex flex-column align-items-start justify-content-center">
               <p className="section__description d-flex align-items-center gap-2">
-                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
-                sit amet.
+                <i className="ri-checkbox-circle-line"></i>
+                Porsche là thương hiệu sản xuất xe hybrid đầu tiên trên thế giới
               </p>
 
               <p className="section__description d-flex align-items-center gap-2">
-                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
-                sit amet.
-              </p>
-            </div>
-
-            <div className="about__section-item d-flex align-items-center">
-              <p className="section__description d-flex align-items-center gap-2">
-                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
-                sit amet.
+                <i className="ri-checkbox-circle-line"></i>
+                Logo “ngựa chồm” của Ferrari và Porsche đều xuất phát từ một nơi
               </p>
 
               <p className="section__description d-flex align-items-center gap-2">
-                <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor
-                sit amet.
+                <i className="ri-checkbox-circle-line"></i>
+                Porsche thiết kế Volkswagen Beetle cho Adolf Hitler
+              </p>
+
+              <p className="section__description d-flex align-items-center gap-2">
+                <i className="ri-checkbox-circle-line"></i>
+                Kỷ lục trên đường đua Nürburgring được thiết lập 30 năm trước
               </p>
             </div>
           </Col>

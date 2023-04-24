@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import img01 from "../assets/all-images/cars-img/car-6.png";
 import { GetCurrency } from "../Utils/common";
 import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
-import BookingForm from "../components/UI/BookingForm";
-import PaymentMethod from "../components/UI/PaymentMethod";
 
 const CarDetails = () => {
   const { slug } = useParams();
@@ -58,7 +55,7 @@ const CarDetails = () => {
                 <p className="section__description">{car?.description}</p>
 
                 <div
-                  className=" d-flex align-items-center mt-3"
+                  className=" d-flex align-items-start mt-3 flex-column"
                   style={{ columnGap: "4rem" }}
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -84,12 +81,7 @@ const CarDetails = () => {
                     ></i>{" "}
                     {car?.speedUp} giây
                   </span>
-                </div>
 
-                <div
-                  className=" d-flex align-items-start mt-3 flex-column"
-                  style={{ columnGap: "2.8rem" }}
-                >
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
                       className="ri-map-pin-line"
@@ -114,20 +106,6 @@ const CarDetails = () => {
                     Tốc độ tối đa - {car?.maxSpeed} km/h
                   </span>
                 </div>
-              </div>
-            </Col>
-
-            <Col lg="7" className="mt-5">
-              <div className="booking-info mt-5">
-                <h5 className="mb-4 fw-bold ">Booking Information</h5>
-                <BookingForm />
-              </div>
-            </Col>
-
-            <Col lg="5" className="mt-5">
-              <div className="payment__info mt-5">
-                <h5 className="mb-4 fw-bold ">Payment Information</h5>
-                <PaymentMethod />
               </div>
             </Col>
           </Row>
