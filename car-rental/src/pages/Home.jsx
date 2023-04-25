@@ -27,7 +27,6 @@ const Home = () => {
         const modelResponse = await modelsApi.getAll();
 
         setModelList(modelResponse.result);
-        console.log("modelResponse.result: ", modelResponse.result);
         setCarList(data.result.items);
       } catch (error) {}
     })();

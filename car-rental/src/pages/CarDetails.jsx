@@ -5,11 +5,13 @@ import { Col, Container, Row } from "reactstrap";
 import { GetCurrency } from "../Utils/common";
 import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
+import Galery from "../components/UI/Galery";
 
 const CarDetails = () => {
   const { slug } = useParams();
 
   const [car, setCar] = useState({});
+  const [galeries, setGaleries] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,7 +19,8 @@ const CarDetails = () => {
       try {
         const data = await carsApi.getBySlug(slug);
         setCar(data.result);
-        console.log("data.result: ", data.result);
+        const galeriesData = await carsApi.getGaleriesByCarId(data.result.id);
+        setGaleries(galeriesData.result);
       } catch (error) {}
     })();
   }, [slug]);
@@ -28,7 +31,7 @@ const CarDetails = () => {
         <Container>
           <Row>
             <Col lg="6">
-              <img src={car?.thumbnail} alt="" className="w-100" />
+              <Galery img={car?.thumbnail} galeries={galeries} />
             </Col>
 
             <Col lg="6">

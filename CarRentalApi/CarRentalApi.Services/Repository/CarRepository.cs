@@ -116,5 +116,18 @@ namespace CarRentalApi.Services.Repository
                 .Include(x => x.OrderDetails)
                 .FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
         }
+
+        public async Task<IList<GaleryDto>> GetGaleriesByCarId(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Galery>()
+                .Where(x => x.CarId == id)
+                .Select(x => new GaleryDto()
+                {
+                    Id  = x.Id,
+                    CarId = x.CarId,
+                    Thumbnail = x.Thumbnail
+                })
+                .ToListAsync(cancellationToken);
+        }
     }
 }

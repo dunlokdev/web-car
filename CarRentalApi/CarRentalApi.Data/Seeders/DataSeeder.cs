@@ -171,23 +171,33 @@ namespace CarRentalApi.Data.Seeders
             {
                 new()
                 {
-                    Thumbnail = "/assets/images/thumbnails/galeries/img-1.png",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-1.png",
                     Car = cars[0]
                 },
                 new()
                 {
-                    Thumbnail = "/assets/images/thumbnails/galeries/img-2.png",
-                    Car = cars[1]
-                },
-                new()
-                {
-                    Thumbnail = "/assets/images/thumbnails/galeries/img-3.png",
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-2.png",
                     Car = cars[0]
                 },
                 new()
                 {
-                    Thumbnail = "/assets/images/thumbnails/galeries/img-4.png",
-                    Car = cars[1]
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-3.png",
+                    Car = cars[0]
+                },
+                new()
+                {
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-4.png",
+                    Car = cars[0]
+                },
+                new()
+                {
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-5.png",
+                    Car = cars[0]
+                },
+                new()
+                {
+                    Thumbnail = "https://localhost:7044/uploads/pictures/galeries/718-6.png",
+                    Car = cars[0]
                 },
 
             };

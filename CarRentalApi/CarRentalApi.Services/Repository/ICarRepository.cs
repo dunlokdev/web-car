@@ -28,5 +28,7 @@ namespace CarRentalApi.Services.Repository
             string slug ,
             bool isIncludeDetail,
             CancellationToken cancellationToken = default);
+
+        Task<IList<GaleryDto>> GetGaleriesByCarId(int id, CancellationToken cancellationToken = default);
     }
 }
