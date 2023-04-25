@@ -1,5 +1,5 @@
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Galery = ({ img, galeries }) => {
   return (
@@ -14,13 +14,14 @@ const Galery = ({ img, galeries }) => {
         <img src={img} alt="" />
       </div>
 
-      {galeries.slice(0, 4).map((item, index) => {
-        return (
-          <div key={item.id}>
-            <img src={item.thumbnail} alt="" />
-          </div>
-        );
-      })}
+      {galeries &&
+        galeries.slice(0, 4).map((item, index) => {
+          return (
+            <div key={item.id}>
+              <img src={item.thumbnail} alt="" />
+            </div>
+          );
+        })}
     </Carousel>
   );
 };

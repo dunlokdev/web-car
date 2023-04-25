@@ -6,6 +6,7 @@ import { GetCurrency } from "../Utils/common";
 import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
 import Galery from "../components/UI/Galery";
+import "../styles/car-detail.css";
 
 const CarDetails = () => {
   const { slug } = useParams();
@@ -21,7 +22,9 @@ const CarDetails = () => {
         setCar(data.result);
         const galeriesData = await carsApi.getGaleriesByCarId(data.result.id);
         setGaleries(galeriesData.result);
-      } catch (error) {}
+      } catch (error) {
+        console.log("An error occurred, ", error);
+      }
     })();
   }, [slug]);
 
@@ -38,7 +41,7 @@ const CarDetails = () => {
               <div className="car__info">
                 <h2 className="section__title">{car?.name}</h2>
 
-                <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
+                <div className=" d-flex align-items-center gap-5 mb-4 mt-3 flex-wrap car__subdesc">
                   <h6 className="rent__price fw-bold fs-4">
                     ${GetCurrency(car?.price)}
                   </h6>
