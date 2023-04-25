@@ -16,6 +16,12 @@ const carsApi = {
     return axiosClient.get(url);
   },
 
+  // https://localhost:7044/api/cars/galeries/1
+  getGaleriesByCarId(id) {
+    const url = `cars/galeries/${id}`;
+    return axiosClient.get(url);
+  },
+
   add(data) {},
 
   update(data) {},

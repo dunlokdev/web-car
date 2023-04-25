@@ -25,6 +25,10 @@ namespace CarRentalApi.WebApi.Endpoints
                            .WithName("GetCarById")
                            .Produces<ApiResponse<CarDto>>();
 
+            routeGroupBuilder.MapGet("/galeries/{id:int}", GetGaleriesByCarId)
+                           .WithName("GetGaleriesByCarId")
+                           .Produces<ApiResponse<IList<GaleryDto>>>();
+
             routeGroupBuilder.MapGet("/slug/{slug:regex(^[a-z0-9_-]+$)}", GetCarBySlug)
                            .WithName("GetCarBySlug")
                            .Produces<ApiResponse<CarDto>>();
@@ -42,6 +46,12 @@ namespace CarRentalApi.WebApi.Endpoints
             return car != null
                 ? Results.Ok(ApiResponse.Success(mapper.Map<CarDto>(car)))
                 : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có mã số = {id}"));
+        }
+
+        private static async Task<IResult> GetGaleriesByCarId(int id, ICarRepository repository)
+        {
+            var galeries = await repository.GetGaleriesByCarId(id);
+            return Results.Ok(ApiResponse.Success(galeries));
         }
 
         private static async Task<IResult> GetCarBySlug(

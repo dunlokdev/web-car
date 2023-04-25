@@ -28,6 +28,7 @@ namespace CarRentalApi.Services.Repository
                     Id  = x.Id,
                     Name = x.Name,
                     UrlSlug = x.UrlSlug,
+                    Thumbnail = x.Thumbnail,
                     CarCount = x.CarList.Count(x => x.IsActived)
                 })
                 .ToListAsync(cancellationToken);

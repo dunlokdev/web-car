@@ -24,6 +24,9 @@ namespace CarRentalApi.Data.Mappings
             builder.Property(x => x.UrlSlug)
                 .IsRequired()
                 .HasMaxLength(250);
+
+            builder.Property(x => x.Thumbnail)
+                .HasMaxLength(500);
         }
     }
 }

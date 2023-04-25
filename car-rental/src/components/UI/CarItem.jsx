@@ -1,11 +1,12 @@
 import React from "react";
 import { Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useAsyncError } from "react-router-dom";
 import "../../styles/car-item.css";
-import img01 from "../../assets/all-images/cars-img/car-4.png";
+import { useState } from "react";
 
 const CarItem = (props) => {
   const {
+    id,
     name,
     price,
     discount,
@@ -46,13 +47,11 @@ const CarItem = (props) => {
             </span>
           </div>
 
-          <button className=" w-50 car__item-btn car__btn-rent">
-            <Link to={`/cars/${urlSlug}`}>Khám phá</Link>
-          </button>
-
-          <button className=" w-50 car__item-btn car__btn-details">
-            <Link to={`/cars/${urlSlug}`}>Đặt mua</Link>
-          </button>
+          <div className="d-flex justify-content-center">
+            <button className="w-50 car__item-btn car__btn-details">
+              <Link to={`/cars/${urlSlug}`}>Tất cả thông số</Link>
+            </button>
+          </div>
         </div>
       </div>
     </Col>

@@ -1,0 +1,6 @@
+@media only screen and (max-width: 768px) {
+  .car__info .car__subdesc {
+    justify-content: center;
+    gap: 12px !important;
+  }
+}

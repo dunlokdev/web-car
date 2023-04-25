@@ -11,7 +11,7 @@ const navLinks = [
   },
   {
     path: "/about",
-    display: "Về Đà Lạt Auto",
+    display: "Về Porsche Đà Lạt",
   },
   {
     path: "/cars",
@@ -74,7 +74,7 @@ const Header = () => {
                   <Link to="/" className=" d-flex align-items-center gap-2">
                     <i className="ri-car-line"></i>
                     <span>
-                      Đà Lạt <br /> Auto
+                      Porsche <br /> Đà Lạt
                     </span>
                   </Link>
                 </h1>
@@ -140,15 +140,6 @@ const Header = () => {
                     {item.display}
                   </NavLink>
                 ))}
-              </div>
-            </div>
-
-            <div className="nav__right">
-              <div className="search__box">
-                <input type="text" placeholder="Tìm kiếm" />
-                <span>
-                  <i className="ri-search-line"></i>
-                </span>
               </div>
             </div>
           </div>

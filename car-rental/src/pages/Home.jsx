@@ -7,10 +7,13 @@ import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import BlogList from "../components/UI/BlogList";
 import CarItem from "../components/UI/CarItem";
 import HeroSlider from "../components/UI/HeroSlider";
+import ModelList from "../components/UI/ModelList";
+import modelsApi from "../api/modelsApi";
 
 const Home = () => {
   // State
   const [carList, setCarList] = useState([]);
+  const [modelList, setModelList] = useState([]);
   const [filters, setFilters] = useState({
     PageSize: 6,
     PageNumber: 1,
@@ -21,6 +24,9 @@ const Home = () => {
     (async () => {
       try {
         const data = await carsApi.getAll(filters);
+        const modelResponse = await modelsApi.getAll();
+
+        setModelList(modelResponse.result);
         setCarList(data.result.items);
       } catch (error) {}
     })();
@@ -36,6 +42,18 @@ const Home = () => {
 
         {/* =========== About section =========== */}
         <AboutSection />
+
+        {/* =========== Model list =========== */}
+        <section>
+          <Container>
+            <Row>
+              <Col lg="12" className="mb-5 text-center">
+                <h2 className="section__title">Các dòng xe</h2>
+              </Col>
+              <ModelList modelList={modelList} />
+            </Row>
+          </Container>
+        </section>
 
         {/* =========== car offer section ============= */}
         <section>
