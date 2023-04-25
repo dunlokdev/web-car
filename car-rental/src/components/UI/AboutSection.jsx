@@ -18,7 +18,7 @@ const AboutSection = ({ aboutClass }) => {
           <Col lg="6" md="6">
             <div className="about__section-content">
               <h4 className="section__subtitle">Về chúng tôi</h4>
-              <h2 className="section__title">Porsche Việt Nam</h2>
+              <h2 className="section__title">Porsche Đà Lạt</h2>
               <p className="section__description">
                 Thành lập từ năm 2007, Porsche đã đánh dấu một thập kỷ tại thị
                 trường Việt Nam và đang phát triển vững mạnh, xác lập vị thế

@@ -6,16 +6,18 @@ import modelsApi from "../api/modelsApi";
 import Helmet from "../components/Helmet/Helmet";
 import CarItem from "../components/UI/CarItem";
 import CommonSection from "../components/UI/CommonSection";
+import { useRef } from "react";
 
 const CarListing = () => {
   const { slug } = useParams();
-  console.log("slug: ", slug);
 
   // State
   const [carList, setCarList] = useState([]);
   const [filters, setFilters] = useState({
     PageSize: 10,
     PageNumber: 1,
+    SortColumn: "Name",
+    SortOrder: "ASC",
   });
 
   // Effect
@@ -33,6 +35,19 @@ const CarListing = () => {
     })();
   }, [filters, slug]);
 
+  const handleChange = (e) => {
+    let sortOrder = e.target.value;
+    let sortColumn = "Price";
+    if (!sortOrder) {
+      sortColumn = "Name";
+      sortOrder = "ASC";
+    }
+
+    console.log("sortColumn: ", sortColumn);
+    console.log("sortOrder: ", sortOrder);
+    setFilters({ ...filters, SortColumn: sortColumn, SortOrder: sortOrder });
+  };
+
   if (carList.length > 0) {
     return (
       <Helmet title="Cars">
@@ -48,13 +63,13 @@ const CarListing = () => {
               <Col lg="12">
                 <div className=" d-flex align-items-center gap-3 mb-5">
                   <span className=" d-flex align-items-center gap-2">
-                    <i className="ri-sort-asc"></i> Sort By
+                    <i className="ri-sort-asc"></i> Sắp xếp theo
                   </span>
 
-                  <select>
-                    <option>Select</option>
-                    <option value="low">Low to High</option>
-                    <option value="high">High to Low</option>
+                  <select onChange={handleChange}>
+                    <option value=""> -- Giá --</option>
+                    <option value="ASC">Thấp đến cao</option>
+                    <option value="DESC">Cao đến thấp</option>
                   </select>
                 </div>
               </Col>
