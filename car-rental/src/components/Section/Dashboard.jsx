@@ -5,6 +5,7 @@ import TableCar from "../Table/TableCar";
 import TableModel from "../Table/TableModel";
 import Statistical from "../TopNav/Statistical";
 import CommonSection from "../UI/CommonSection";
+import CarBank from "../UI/CarBank";
 
 const Dashboard = () => {
   // State
@@ -37,6 +38,7 @@ const Dashboard = () => {
       <div className="container-fluid px-4">
         <CommonSection title="Hệ thống quản trị" />
         <Statistical countCar={countCar} countModel={countModel} />
+        <CarBank />
         <TableCar carList={carList} />
         <TableModel modelList={modelList} />
       </div>

@@ -28,7 +28,7 @@ const TableCar = ({ carList }) => {
                     <td>{item.name}</td>
                     <td>{item.shortDescripton}</td>
                     <td>{GetCurrency(item.price)}</td>
-                    <td>{item.isActived ? "Hiển thị" : "Không"}</td>
+                    <td>{item.isActived ? "Có" : "Không"}</td>
                     <td>{item.model}</td>
                     <td>-{item.discount}%</td>
                   </tr>
