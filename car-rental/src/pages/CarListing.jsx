@@ -24,6 +24,8 @@ const CarListing = () => {
 
   // Effect
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     (async () => {
       try {
         let data = [];
