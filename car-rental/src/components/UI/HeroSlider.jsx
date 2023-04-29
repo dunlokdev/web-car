@@ -26,7 +26,7 @@ const HeroSlider = () => {
             <h1 className="text-light mb-4">Macan S mới</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/cars">Tìm hiểu ngay</Link>
+              <Link to="/about">Tìm hiểu ngay</Link>
             </button>
           </div>
         </Container>
@@ -41,7 +41,7 @@ const HeroSlider = () => {
             <h1 className="text-light mb-4">Taycan GTS</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/cars">Tìm hiểu ngay</Link>
+              <Link to="/about">Tìm hiểu ngay</Link>
             </button>
           </div>
         </Container>
@@ -54,7 +54,7 @@ const HeroSlider = () => {
             <h1 className="text-light mb-4">Cayenne Turbo GT mới</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/cars">Tìm hiểu ngay</Link>
+              <Link to="/about">Tìm hiểu ngay</Link>
             </button>
           </div>
         </Container>

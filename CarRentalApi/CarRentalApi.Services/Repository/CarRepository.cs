@@ -4,6 +4,7 @@ using CarRentalApi.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using CarRentalApi.Core.Contracts;
 using CarRentalApi.Services.Extentions;
+using Azure;
 
 namespace CarRentalApi.Services.Repository
 {
@@ -128,6 +129,24 @@ namespace CarRentalApi.Services.Repository
                     Thumbnail = x.Thumbnail
                 })
                 .ToListAsync(cancellationToken);
+        }
+        public async Task<bool> IsCarlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Car>()
+                .AnyAsync(x => x.Id != id && x.UrlSlug == slug, cancellationToken);
+        }
+
+        public async Task<Car> CreateOrUpdateCarAsync(Car car, CancellationToken cancellationToken = default)
+        {
+            if (car.Id > 0)
+                _context.Update(car);
+            else
+                _context.Add(car);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return car;
+
         }
     }
 }

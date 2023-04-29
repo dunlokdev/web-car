@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { GetCurrency } from "../../Utils/common";
 import "../../styles/common.css";
+
 const TableCar = ({ carList }) => {
   return (
     <>
@@ -21,19 +23,45 @@ const TableCar = ({ carList }) => {
               </tr>
             </thead>
             <tbody>
-              {carList.map((item, index) => {
-                return (
-                  <tr key={item.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{item.name}</td>
-                    <td>{item.shortDescripton}</td>
-                    <td>{GetCurrency(item.price)}</td>
-                    <td>{item.isActived ? "Có" : "Không"}</td>
-                    <td>{item.model}</td>
-                    <td>-{item.discount}%</td>
-                  </tr>
-                );
-              })}
+              {carList.length > 0 ? (
+                carList.map((item, index) => {
+                  return (
+                    <tr key={item.id}>
+                      <th scope="row">{index + 1}</th>
+                      <td className="cursor">{item.name}</td>
+                      <td>{item.shortDescripton}</td>
+                      <td>{GetCurrency(item.price)}</td>
+                      <td>{item.isActived ? "Có" : "Không"}</td>
+                      <td>{item.model}</td>
+                      <td>-{item.discount}%</td>
+                      <td className="d-flex gap-1 ">
+                        <Link
+                          to={`/admin/cars/edit/${item.id}`}
+                          className="button edit"
+                        >
+                          <i className="ri-pencil-line"></i>
+                        </Link>
+                        <Link
+                          to={`/admin/cars/edit/${item.id}`}
+                          className="button delete"
+                        >
+                          <i className="ri-delete-bin-line"></i>
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td>#</td>
+                  <td>Không tìm thấy</td>
+                  <td>#</td>
+                  <td>#</td>
+                  <td>#</td>
+                  <td>#</td>
+                  <td>#</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

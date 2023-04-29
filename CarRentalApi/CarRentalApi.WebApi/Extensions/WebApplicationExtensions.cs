@@ -1,5 +1,6 @@
 ﻿using CarRentalApi.Data.Contexts;
 using CarRentalApi.Data.Seeders;
+using CarRentalApi.Services.Media;
 using CarRentalApi.Services.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ namespace CarRentalApi.WebApi.Extensions
 
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
             builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
             builder.Services.AddScoped<IModelRepository, ModelRepository>();
             
             return builder;

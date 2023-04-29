@@ -13,6 +13,7 @@ import Dashboard from "./components/Section/Dashboard";
 import ManagerModels from "./components/Section/ManagerModels";
 import ManagerCars from "./components/Section/ManagerCars";
 import ManagerPosts from "./components/Section/ManagerPosts";
+import Edit from "./components/UI/Edit";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="models" element={<ManagerModels />} />
           <Route path="cars" element={<ManagerCars />} />
+          <Route path="cars/edit/:id" element={<Edit />} />
           <Route path="posts" element={<ManagerPosts />} />
         </Route>
         <Route path="/" element={<Layout />} exact>

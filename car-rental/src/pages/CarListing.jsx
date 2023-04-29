@@ -13,7 +13,6 @@ const CarListing = () => {
   // State
   const [carList, setCarList] = useState([]);
   const [filters, setFilters] = useState({
-    Keyword: "",
     PageSize: 10,
     PageNumber: 1,
     SortColumn: "Name",

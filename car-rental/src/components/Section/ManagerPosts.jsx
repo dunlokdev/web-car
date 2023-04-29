@@ -1,4 +1,10 @@
+import CommonSection from "../UI/CommonSection";
+
 const ManagerPosts = () => {
-  return <div>ManagerPosts</div>;
+  return (
+    <>
+      <CommonSection title="Quản lý bài viết" />
+    </>
+  );
 };
 export default ManagerPosts;

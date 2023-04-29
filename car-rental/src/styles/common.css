@@ -5,8 +5,31 @@
   --second-bg-color: #c1efde;
 }
 
-tbody tr {
-  cursor: pointer;
+.button {
+  min-width: 30x;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button.edit {
+  border: 1px solid;
+  color: #ffc107;
+}
+
+.button.edit:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.button.delete {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.button.delete:hover {
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .primary-text {

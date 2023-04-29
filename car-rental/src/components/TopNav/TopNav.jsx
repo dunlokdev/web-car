@@ -9,7 +9,7 @@ const TopNav = ({ onToggle, toggle }) => {
           id="menu-toggle"
           onClick={() => onToggle(!toggle)}
         ></i>
-        <h2 className="fs-2 m-0">Quản trị hệ thống</h2>
+        <h2 className="fs-2 m-0">Porsche Đà Lạt</h2>
       </div>
     </>
   );

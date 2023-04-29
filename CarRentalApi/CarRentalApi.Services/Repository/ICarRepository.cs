@@ -30,5 +30,7 @@ namespace CarRentalApi.Services.Repository
             CancellationToken cancellationToken = default);
 
         Task<IList<GaleryDto>> GetGaleriesByCarId(int id, CancellationToken cancellationToken = default);
+        Task<bool> IsCarlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default);
+        Task<Car> CreateOrUpdateCarAsync(Car car, CancellationToken cancellationToken= default);
     }
 }

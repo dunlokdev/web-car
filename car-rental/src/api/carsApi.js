@@ -22,6 +22,13 @@ const carsApi = {
     return axiosClient.get(url);
   },
 
+  addOrUpdate(data) {
+    const url = `/cars`;
+    return axiosClient.post(url, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+
   add(data) {},
 
   update(data) {},

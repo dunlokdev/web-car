@@ -61,7 +61,7 @@ const Home = () => {
             <Row>
               <Col lg="12" className="text-center mb-5">
                 <h6 className="section__subtitle">Tận hưởng</h6>
-                <h2 className="section__title">Các dòng Porche</h2>
+                <h2 className="section__title">Các dòng Porsche</h2>
               </Col>
               {carList.map((item, index) => (
                 <CarItem item={item} key={item.id} />

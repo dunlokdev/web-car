@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { GetCurrency } from "../../Utils/common";
 import "../../styles/common.css";
 const TableModel = ({ modelList }) => {
   return (
     <>
       <div className="row my-5">
-        <h3 className="fs-4 mb-3">Danh sách các loại xe</h3>
+        <h3 className="fs-4 mb-3">Danh sách các dòng xe</h3>
         <div className="col">
           <table className="table bg-white rounded shadow-sm  table-hover">
             <thead>
