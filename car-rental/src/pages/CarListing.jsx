@@ -12,6 +12,7 @@ const CarListing = () => {
 
   // State
   const [carList, setCarList] = useState([]);
+  const [models, setModels] = useState([]);
   const [filters, setFilters] = useState({
     PageSize: 10,
     PageNumber: 1,
@@ -33,6 +34,16 @@ const CarListing = () => {
         } else {
           data = await carsApi.getAll(filters);
         }
+        const response = await modelsApi.getAll();
+        const models = response.result.map((item, index) => {
+          return {
+            id: item.id,
+            name: item.name,
+            urlSlug: item.urlSlug,
+          };
+        });
+
+        setModels(models);
         setCarList(data.result.items);
       } catch (error) {}
     })();
@@ -58,6 +69,23 @@ const CarListing = () => {
     setKeyword("");
   };
 
+  const handleModelChange = (e) => {
+    if (!e.target.value) {
+      setFilters({ ...filters });
+      return;
+    }
+    const slug = e.target.value;
+
+    (async () => {
+      const data = await modelsApi.getCarByModelSlug(slug, {
+        PageSize: 100,
+        PageNumber: 1,
+      });
+      console.log("data: ", data);
+      setCarList(data.result.items);
+    })();
+  };
+
   return (
     <Helmet title="Cars">
       {slug ? (
@@ -80,9 +108,27 @@ const CarListing = () => {
                   className="form-select"
                   onChange={handleChange}
                 >
-                  <option value=""> -- Giá --</option>
+                  <option value=""> A-Z </option>
                   <option value="ASC">Thấp đến cao</option>
                   <option value="DESC">Cao đến thấp</option>
+                </select>
+
+                <span className="d-flex align-items-center gap-2">
+                  <i className="ri-car-line"></i> Dòng xe
+                </span>
+                <select
+                  title="Dòng xe"
+                  name="authorId"
+                  style={{ width: "150px" }}
+                  className="form-select"
+                  onChange={handleModelChange}
+                >
+                  <option value=""> Tất cả</option>
+                  {models.map((item) => (
+                    <option key={item.id} value={item.urlSlug}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
 
                 <form onSubmit={handleSubmit}>

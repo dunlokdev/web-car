@@ -16,7 +16,7 @@ const ManagerModels = () => {
         setModelList(result);
       } catch (error) {}
     })();
-  });
+  }, []);
 
   return (
     <>
