@@ -23,6 +23,7 @@ const carsApi = {
   },
 
   addOrUpdate(data) {
+    console.log("data: ", data);
     const url = `/cars`;
     return axiosClient.post(url, data, {
       headers: { "Content-Type": "multipart/form-data" },

@@ -33,15 +33,21 @@ const AddOrEdit = () => {
     wattage: 0,
     shortDescripton: "",
     imageFile: "",
+    thumbnail: "",
   });
   const [models, setModels] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     (async () => {
       try {
-        const data = await carsApi.getById(id);
+        if (id > 0) {
+          const data = await carsApi.getById(id);
+          setCar(data.result);
+        }
         const response = await modelsApi.getAll();
+        console.log("response: ", response);
         const models = response.result.map((item, index) => {
           return {
             id: item.id,
@@ -51,17 +57,19 @@ const AddOrEdit = () => {
         });
 
         setModels(models);
-        setCar(data.result);
       } catch (error) {
         console.log("An error occurred, ", error);
       }
     })();
+
+    console.log("hihi vao day roi");
   }, [id]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
     let formData = new FormData(e.target);
+
     (async () => {
       const response = await carsApi.addOrUpdate(formData);
       console.log("response: ", response);
@@ -89,18 +97,22 @@ const AddOrEdit = () => {
 
         <div className="row gap-3">
           <div className="col-5">
-            <img src={car.thumbnail} alt="" className="edit-thumbnail" />
-            <h3 className="text-center">{car.name}</h3>
+            <img
+              src={car?.thumbnail || "https://via.placeholder.com/1368x400"}
+              alt=""
+              className="edit-thumbnail"
+            />
+            <h3 className="text-center">{car?.name}</h3>
           </div>
 
           <div className="col-3 d-flex gap-3 flex-column">
-            <input type="hidden" readOnly name="id" value={car.id} />
+            <input type="hidden" readOnly name="id" value={car?.id} />
             <div className="form-group">
-              <label>Tên xe (*)</label>
+              <label>Tên xe</label>
               <input
                 type="text"
                 className="form-control"
-                value={car.name}
+                value={car?.name}
                 name="name"
                 onChange={(e) => {
                   setCar({ ...car, name: e.target.value });
@@ -113,7 +125,7 @@ const AddOrEdit = () => {
               <input
                 type="text"
                 className="form-control"
-                value={car.price}
+                value={car?.price}
                 name="price"
                 onChange={(e) => {
                   setCar({ ...car, price: e.target.value });
@@ -122,25 +134,25 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>Discount</label>
+              <label>Khuyến mãi</label>
               <input
                 type="text"
                 name="discount"
                 className="form-control"
-                value={car.discount}
+                value={car?.discount}
                 onChange={(e) => {
-                  setCar({ ...car, discount: e.target.value });
+                  setCar({ ...car, discount: e.target.value || 0 });
                 }}
               />
             </div>
 
             <div className="form-group">
-              <label>ShortDescripton (*)</label>
+              <label>Mô tả (*)</label>
               <textarea
                 rows={3}
                 className="form-control"
                 name="shortDescripton"
-                value={decode(car.shortDescripton || "")}
+                value={decode(car?.shortDescripton || "")}
                 onChange={(e) => {
                   setCar({ ...car, shortDescripton: e.target.value });
                 }}
@@ -148,12 +160,12 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>Description (*)</label>
+              <label>Chi tiết (*)</label>
               <textarea
                 rows={5}
                 className="form-control"
                 name="description"
-                value={decode(car.description || "")}
+                value={decode(car?.description || "")}
                 onChange={(e) => {
                   setCar({ ...car, description: e.target.value });
                 }}
@@ -177,7 +189,7 @@ const AddOrEdit = () => {
                 className="form-check-input"
                 type="checkbox"
                 name="isActived"
-                checked={car.isActived}
+                checked={car?.isActived}
                 title="Published"
                 onChange={(e) =>
                   setCar({ ...car, isActived: e.target.checked })
@@ -189,12 +201,12 @@ const AddOrEdit = () => {
 
           <div className="col-3 d-flex gap-3 flex-column">
             <div className="form-group">
-              <label>Wattage (*)</label>
+              <label>Công xuất (*)</label>
               <input
                 type="text"
                 className="form-control"
                 name="wattage"
-                value={car.wattage}
+                value={car?.wattage}
                 onChange={(e) => {
                   setCar({ ...car, wattage: e.target.value });
                 }}
@@ -202,12 +214,12 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>Torque (*)</label>
+              <label>Mô men xoắn cực đại (*)</label>
               <input
                 type="text"
                 className="form-control"
                 name="torque"
-                value={car.torque}
+                value={car?.torque}
                 onChange={(e) => {
                   setCar({ ...car, torque: e.target.value });
                 }}
@@ -215,12 +227,12 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>SpeedUp (*)</label>
+              <label>Tăng tốc từ 0 - 100 km/giờ (0 - 62 dặm/giờ) (*)</label>
               <input
                 type="text"
                 className="form-control"
                 name="speedUp"
-                value={car.speedUp}
+                value={car?.speedUp}
                 onChange={(e) => {
                   setCar({ ...car, speedUp: e.target.value });
                 }}
@@ -228,12 +240,12 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>MaxSpeed (*)</label>
+              <label>Tốc độ tối đa (*)</label>
               <input
                 type="text"
                 className="form-control"
                 name="maxSpeed"
-                value={car.maxSpeed}
+                value={car?.maxSpeed}
                 onChange={(e) => {
                   setCar({ ...car, maxSpeed: e.target.value });
                 }}
@@ -241,40 +253,40 @@ const AddOrEdit = () => {
             </div>
 
             <div className="form-group">
-              <label>Consume</label>
+              <label>Tiêu thụ nhiên liệu kết hợp (lít/100km)</label>
               <input
                 type="text"
                 className="form-control"
                 name="consume"
-                value={car.consume}
+                value={car?.consume}
                 onChange={(e) => {
-                  setCar({ ...car, consume: e.target.value });
+                  setCar({ ...car, consume: e.target.value || 0 });
                 }}
               />
             </div>
 
             <div className="form-group">
-              <label>Emissions</label>
+              <label>Lượng khí thải CO2 (g/km)</label>
               <input
                 type="text"
                 className="form-control"
                 name="emission"
-                value={car.emission}
+                value={car?.emission}
                 onChange={(e) => {
-                  setCar({ ...car, emission: e.target.value });
+                  setCar({ ...car, emission: e.target.value || 0 });
                 }}
               />
             </div>
 
             <div className="form-group">
-              <label>Evaluate</label>
+              <label>Đánh giá</label>
               <input
                 type="text"
                 className="form-control"
                 name="evaluate"
-                value={car.evaluate}
+                value={car?.evaluate}
                 onChange={(e) => {
-                  setCar({ ...car, evaluate: e.target.value });
+                  setCar({ ...car, evaluate: e.target.value || 0 });
                 }}
               />
             </div>
@@ -285,13 +297,15 @@ const AddOrEdit = () => {
                 title="Dòng xe"
                 name="modelId"
                 style={{ width: "150px" }}
+                value={car?.modelId}
                 className="form-select"
                 onChange={(e) => {
                   setCar({ ...car, modelId: e.target.value });
                 }}
               >
+                <option value={0}>-- Chọn --</option>
                 {models.map((item) => (
-                  <option key={item.id} value={item.id}>
+                  <option key={item.id} value={item?.id}>
                     {item.name}
                   </option>
                 ))}

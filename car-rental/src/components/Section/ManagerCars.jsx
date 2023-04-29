@@ -4,6 +4,7 @@ import carsApi from "../../api/carsApi";
 import modelsApi from "../../api/modelsApi";
 import TableCar from "../Table/TableCar";
 import CommonSection from "../UI/CommonSection";
+import { Link } from "react-router-dom";
 
 const ManagerCars = () => {
   // State
@@ -124,15 +125,15 @@ const ManagerCars = () => {
                   onChange={(e) => setKeyword(e.target.value)}
                 />
               </div>
-              <button onChange={handleResetFilter} className="btn btn-sm">
+              <button onChange={handleModelChange} className="btn btn-sm">
                 <i className="ri-search-line"></i>
               </button>
             </div>
           </form>
 
-          <button className="btn">
+          <Link to={`edit/${0}`} className="btn">
             <i className="ri-add-fill"></i>
-          </button>
+          </Link>
         </div>
       </Col>
 
