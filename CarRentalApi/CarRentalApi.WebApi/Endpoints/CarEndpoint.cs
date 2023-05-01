@@ -41,7 +41,9 @@ namespace CarRentalApi.WebApi.Endpoints
                               .Accepts<CarEditModel>("multipart/form-data")
                               .Produces(401)
                               .Produces<ApiResponse<CarDto>>();
-
+            routeGroupBuilder.MapDelete("/{id:int}", DeleteCar)
+                            .WithName("DeleteCar")
+                            .Produces<ApiResponse<string>>();
 
             return app;
         }
@@ -180,6 +182,13 @@ namespace CarRentalApi.WebApi.Endpoints
             await repository.CreateOrUpdateCarAsync(car);
 
             return Results.Ok(ApiResponse.Success(mapper.Map<CarDto>(car), HttpStatusCode.Created));
+        }
+
+        private static async Task<IResult> DeleteCar(int id, ICarRepository blogRepository)
+        {
+            return await blogRepository.DeleteCarByIdAsync(id)
+                    ? Results.Ok(ApiResponse.Success($"Xóa thành công xe có Id = {id}"))
+                    : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có Id = {id}"));
         }
 
     }

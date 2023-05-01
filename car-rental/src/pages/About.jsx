@@ -7,6 +7,7 @@ import CommonSection from "../components/UI/CommonSection";
 
 import driveImg from "../assets/all-images/drive.jpg";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
+import Map from "../components/UI/Map";
 
 const About = () => {
   return (
@@ -59,6 +60,7 @@ const About = () => {
             </Col>
           </Row>
         </Container>
+        <Map />
       </section>
     </Helmet>
   );

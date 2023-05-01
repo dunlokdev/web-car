@@ -2,7 +2,8 @@
   position: relative;
   background-image: url("../assets/card-visa.png");
   background-size: cover;
-  width: 444px;
+  max-width: 444px;
+  width: 100%;
   color: #fff;
   border-radius: 16px;
   overflow: hidden;

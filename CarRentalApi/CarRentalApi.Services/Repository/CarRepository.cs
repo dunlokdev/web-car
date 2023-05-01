@@ -124,7 +124,7 @@ namespace CarRentalApi.Services.Repository
                 .Where(x => x.CarId == id)
                 .Select(x => new GaleryDto()
                 {
-                    Id  = x.Id,
+                    Id = x.Id,
                     CarId = x.CarId,
                     Thumbnail = x.Thumbnail
                 })
@@ -147,6 +147,12 @@ namespace CarRentalApi.Services.Repository
 
             return car;
 
+        }
+
+        public async Task<bool> DeleteCarByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Car>()
+                            .Where(t => t.Id == id).ExecuteDeleteAsync(cancellationToken) > 0;
         }
     }
 }

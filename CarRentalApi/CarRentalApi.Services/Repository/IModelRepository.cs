@@ -11,5 +11,6 @@ namespace CarRentalApi.Services.Repository
     public interface IModelRepository
     {
         Task<IList<ModelDto>> GetModelListAsync(CancellationToken cancellationToken = default);
+        Task<Model> GetModelByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

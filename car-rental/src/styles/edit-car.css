@@ -1,0 +1,32 @@
+.edit-thumbnail {
+  height: 250px;
+  width: 100%;
+}
+
+.action {
+  min-width: 30x;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.action.edit {
+  border: 1px solid;
+  color: #ffc107;
+}
+
+.action.edit:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.action.delete {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.action.delete:hover {
+  background-color: #dc3545;
+  color: #fff;
+}

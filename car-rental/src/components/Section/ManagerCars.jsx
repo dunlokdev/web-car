@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Col } from "reactstrap";
 import carsApi from "../../api/carsApi";
 import modelsApi from "../../api/modelsApi";
 import TableCar from "../Table/TableCar";
 import CommonSection from "../UI/CommonSection";
-import { Link } from "react-router-dom";
 
 const ManagerCars = () => {
   // State
@@ -62,7 +62,6 @@ const ManagerCars = () => {
         PageSize: 100,
         PageNumber: 1,
       });
-      console.log("data: ", data);
       setCarList(data.result.items);
     })();
   };
@@ -74,7 +73,24 @@ const ManagerCars = () => {
     setKeyword("");
   };
 
-  const handleResetFilter = () => {};
+  const handleDeleteCar = (id) => {
+    (async () => {
+      try {
+        const { isSuccess, result } = await carsApi.remove(id);
+        if (isSuccess) {
+          alert(`Xoá thành công xe có id = ${id}`);
+          setFilters({
+            PageSize: 100,
+            PageNumber: 1,
+            SortColumn: "Name",
+            SortOrder: "ASC",
+          });
+        }
+      } catch (error) {
+        console.log("Try again to delete car...", error);
+      }
+    })();
+  };
 
   return (
     <>
@@ -125,7 +141,7 @@ const ManagerCars = () => {
                   onChange={(e) => setKeyword(e.target.value)}
                 />
               </div>
-              <button onChange={handleModelChange} className="btn btn-sm">
+              <button type="submit" className="btn btn-sm">
                 <i className="ri-search-line"></i>
               </button>
             </div>
@@ -138,7 +154,7 @@ const ManagerCars = () => {
       </Col>
 
       <div className="manager-cars px-4">
-        <TableCar carList={carList} />
+        <TableCar carList={carList} handleDeleteCar={handleDeleteCar} />
       </div>
     </>
   );

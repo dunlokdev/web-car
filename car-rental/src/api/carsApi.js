@@ -23,18 +23,18 @@ const carsApi = {
   },
 
   addOrUpdate(data) {
-    console.log("data: ", data);
     const url = `/cars`;
     return axiosClient.post(url, data, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
 
-  add(data) {},
+  // https://localhost:7044/api/cars/43
+  remove(id) {
+    const url = `/cars/${id}`;
 
-  update(data) {},
-
-  remove(id) {},
+    return axiosClient.delete(url);
+  },
 };
 
 export default carsApi;

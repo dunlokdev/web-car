@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import modelsApi from "../../api/modelsApi";
 import TableModel from "../Table/TableModel";
 import CommonSection from "../UI/CommonSection";
-import FilterPane from "../UI/FilterPane";
 
 const ManagerModels = () => {
   // State
   const [modelList, setModelList] = useState([]);
+  const [filter, setFilters] = useState({
+    PageSize: 100,
+    PageNumber: 1,
+    SortColumn: "Name",
+    SortOrder: "ASC",
+  });
 
   // Effect
   useEffect(() => {
@@ -21,7 +26,6 @@ const ManagerModels = () => {
   return (
     <>
       <CommonSection title="Quản lý dòng xe" />
-      <FilterPane />
       <div className="manager-models px-4">
         <TableModel modelList={modelList} />
       </div>

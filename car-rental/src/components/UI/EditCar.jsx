@@ -1,16 +1,9 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import {
-  Link,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import carsApi from "../../api/carsApi";
-import "../../styles/edit.css";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { decode } from "../../Utils/common";
+import carsApi from "../../api/carsApi";
 import modelsApi from "../../api/modelsApi";
+import "../../styles/edit-car.css";
 
 const AddOrEdit = () => {
   const { id } = useParams();
@@ -61,8 +54,6 @@ const AddOrEdit = () => {
         console.log("An error occurred, ", error);
       }
     })();
-
-    console.log("hihi vao day roi");
   }, [id]);
 
   const handleOnSubmit = (e) => {
@@ -72,7 +63,6 @@ const AddOrEdit = () => {
 
     (async () => {
       const response = await carsApi.addOrUpdate(formData);
-      console.log("response: ", response);
 
       if (response.isSuccess) {
         alert("Đã lưu thành công!");

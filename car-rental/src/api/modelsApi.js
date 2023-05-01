@@ -3,7 +3,12 @@ import axiosClient from "./axiosClient";
 const modelsApi = {
   getAll() {
     const url = "/model";
-    console.log("call api");
+    return axiosClient.get(url);
+  },
+
+  getById(id) {
+    const url = `/model/${id}`;
+
     return axiosClient.get(url);
   },
 

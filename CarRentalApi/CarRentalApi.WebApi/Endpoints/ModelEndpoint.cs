@@ -6,6 +6,7 @@ using CarRentalApi.WebApi.Models.Car;
 using MapsterMapper;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CarRentalApi.WebApi.Endpoints
 {
@@ -19,11 +20,27 @@ namespace CarRentalApi.WebApi.Endpoints
                            .WithName("GetModels")
                            .Produces<ApiResponse<IList<ModelDto>>>();
 
+            routeGroupBuilder.MapGet("{id:int}", GetModelById)
+               .WithName("GetModelById")
+               .Produces<ApiResponse<ModelDto>>();
+
             routeGroupBuilder.MapGet("/{slug:regex(^[a-z0-9_-]+$)}/cars", GetCarsByModelSlug)
                            .WithName("GetCarsByModelSlug")
                            .Produces<ApiResponse<PaginationResult<CarDto>>>();
 
             return app;
+        }
+
+        private static async Task<IResult> GetModelById(
+            int id,
+            IMapper mapper,
+            IModelRepository repository)
+        {
+            var model = await repository.GetModelByIdAsync(id);
+
+            return model != null
+                ? Results.Ok(ApiResponse.Success(mapper.Map<ModelDto>(model)))
+                : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy dòng có mã số = {id}"));
         }
 
         private static async Task<IResult> GetModels(

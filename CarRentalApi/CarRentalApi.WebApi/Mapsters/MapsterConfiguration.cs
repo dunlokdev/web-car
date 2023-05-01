@@ -14,6 +14,9 @@ namespace TatBlog.WebApi.Mapsters
             config.NewConfig<CarFilterModel, CarQuery>();
             config.NewConfig<Car, CarDto>()
                 .Map(dst => dst.Model, src => src.Model.Name);
+
+            config.NewConfig<Model, ModelDto>()
+                .Map(dst => dst.CarCount, src => src.CarList.Count());
         }
     }
 }

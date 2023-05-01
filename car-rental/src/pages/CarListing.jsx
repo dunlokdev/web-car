@@ -57,8 +57,6 @@ const CarListing = () => {
       sortOrder = "ASC";
     }
 
-    console.log("sortColumn: ", sortColumn);
-    console.log("sortOrder: ", sortOrder);
     setFilters({ ...filters, SortColumn: sortColumn, SortOrder: sortOrder });
   };
 
@@ -81,7 +79,6 @@ const CarListing = () => {
         PageSize: 100,
         PageNumber: 1,
       });
-      console.log("data: ", data);
       setCarList(data.result.items);
     })();
   };
@@ -89,7 +86,7 @@ const CarListing = () => {
   return (
     <Helmet title="Cars">
       {slug ? (
-        <CommonSection title={`Danh sách xe - Phiên bản ${slug}`} />
+        <CommonSection title={`${slug}`} />
       ) : (
         <CommonSection title="Danh sách xe" />
       )}
@@ -122,8 +119,9 @@ const CarListing = () => {
                   style={{ width: "150px" }}
                   className="form-select"
                   onChange={handleModelChange}
+                  value={slug ? slug : ""}
                 >
-                  <option value=""> Tất cả</option>
+                  <option value="">Tất cả</option>
                   {models.map((item) => (
                     <option key={item.id} value={item.urlSlug}>
                       {item.name}
