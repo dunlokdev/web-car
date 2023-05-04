@@ -37,11 +37,14 @@ const TableCar = ({ carList, handleDeleteCar }) => {
                       <td className="cursor">{item.name}</td>
                       <td>
                         <img
-                          src={item.thumbnail}
+                          src={
+                            item?.thumbnail ||
+                            "https://placehold.co/600x400?text=Thumbnail"
+                          }
                           alt=""
                           style={{
                             height: "100px",
-                            width: "auto",
+                            width: "200px",
                             objectFit: "cover",
                           }}
                         />

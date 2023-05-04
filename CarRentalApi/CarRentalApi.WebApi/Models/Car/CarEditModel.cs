@@ -1,11 +1,7 @@
-﻿using CarRentalApi.Core.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 
-namespace CarRentalApi.WebApi.Models.Car
+namespace CarRentalApi.WebApi.Models.Cars
 {
     public class CarEditModel
     {

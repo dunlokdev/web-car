@@ -9,7 +9,6 @@ using CarRentalApi.Core.Collections;
 using CarRentalApi.WebApi.Models;
 using CarRentalApi.WebApi.Models.Car;
 using System.Net;
-using Microsoft.Extensions.Hosting;
 using CarRentalApi.Services.Media;
 
 namespace CarRentalApi.WebApi.Endpoints

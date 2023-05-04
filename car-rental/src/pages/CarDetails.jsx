@@ -34,7 +34,13 @@ const CarDetails = () => {
         <Container>
           <Row>
             <Col lg="6">
-              <Galery img={car?.thumbnail} galeries={galeries} />
+              <Galery
+                img={
+                  car?.thumbnail ||
+                  "https://placehold.co/600x400?text=Thumbnail"
+                }
+                galeries={galeries}
+              />
             </Col>
 
             <Col lg="6">

@@ -12,5 +12,8 @@ namespace CarRentalApi.Services.Repository
     {
         Task<IList<ModelDto>> GetModelListAsync(CancellationToken cancellationToken = default);
         Task<Model> GetModelByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<bool> IsModelSlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default);
+        Task<Model> CreateOrUpdateModelAsync(Model model, CancellationToken cancellationToken = default);
+        Task<bool> DeleteModelByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

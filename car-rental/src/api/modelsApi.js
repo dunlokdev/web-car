@@ -18,11 +18,18 @@ const modelsApi = {
     return axiosClient.get(url, { params });
   },
 
-  add(data) {},
+  addOrUpdate(data) {
+    const url = `/model`;
+    return axiosClient.post(url, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
 
-  update(data) {},
+  remove(id) {
+    const url = `/model/${id}`;
 
-  remove(id) {},
+    return axiosClient.delete(url);
+  },
 };
 
 export default modelsApi;

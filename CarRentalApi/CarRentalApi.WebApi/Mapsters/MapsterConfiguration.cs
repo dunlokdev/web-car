@@ -16,7 +16,7 @@ namespace TatBlog.WebApi.Mapsters
                 .Map(dst => dst.Model, src => src.Model.Name);
 
             config.NewConfig<Model, ModelDto>()
-                .Map(dst => dst.CarCount, src => src.CarList.Count());
+                .Map(dst => dst.CarCount, src => src.CarList == null ? 0 : src.CarList.Count());
         }
     }
 }

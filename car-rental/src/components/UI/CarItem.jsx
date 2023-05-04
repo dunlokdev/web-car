@@ -1,32 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Col } from "reactstrap";
-import { Link, useAsyncError } from "react-router-dom";
 import "../../styles/car-item.css";
-import { useState } from "react";
 
 const CarItem = (props) => {
-  const {
-    id,
-    name,
-    price,
-    discount,
-    thumbnail,
-    description,
-    urlSlug,
-    model,
-    maxSpeed,
-  } = props.item;
+  const { name, price, thumbnail, urlSlug, model, maxSpeed } = props.item;
 
   const priceVnd = new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
   }).format(price);
 
+  // handle img not found
+  const img = thumbnail
+    ? thumbnail
+    : "https://placehold.co/600x400?text=Thumbnail";
+
   return (
     <Col lg="4" md="4" sm="6" className="mb-5">
       <div className="car__item">
         <div className="car__img">
-          <img src={thumbnail} alt="" className="w-100" />
+          <img src={img} alt="" style={{ width: "374px", height: "211px" }} />
         </div>
 
         <div className="car__item-content mt-4">

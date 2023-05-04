@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import "../../styles/common.css";
-const TableModel = ({ modelList }) => {
+const TableModel = ({ modelList, handleDeleteModel }) => {
+  const handleDelete = (id) => {
+    if (handleDeleteModel) handleDeleteModel(id);
+  };
+
   return (
     <>
       <div className="row my-5">
@@ -51,7 +55,12 @@ const TableModel = ({ modelList }) => {
                         >
                           <i className="ri-pencil-line"></i>
                         </Link>
-                        <button onClick={() => {}} className="action delete">
+                        <button
+                          onClick={() => {
+                            handleDelete(item.id);
+                          }}
+                          className="action delete"
+                        >
                           <i className="ri-delete-bin-line"></i>
                         </button>
                       </div>

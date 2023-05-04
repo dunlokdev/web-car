@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import modelsApi from "../../api/modelsApi";
 
 const EditModel = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   console.log("🚀 ~ EditModel ~ id:", id);
 
   const [model, setModel] = useState({
@@ -30,6 +31,18 @@ const EditModel = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
+    let formData = new FormData(e.target);
+
+    (async () => {
+      const response = await modelsApi.addOrUpdate(formData);
+      console.log("🚀 ~ response:", response);
+
+      if (response.isSuccess) {
+        alert("Đã lưu thành công!");
+        navigate("/admin/models");
+      } else alert("Đã xảy ra lỗi!");
+    })();
   };
 
   return (
@@ -76,7 +89,7 @@ const EditModel = () => {
                 <p className="text-black-500 fw-bold">{model?.urlSlug}</p>
               </div>
               <div>
-                <p>Số xe thuộc dòng {model?.name}: </p>
+                <p>Số xe thuộc dòng: </p>
                 <p className="text-black-500 fw-bold">{model?.carCount} xe</p>
               </div>
               <div>

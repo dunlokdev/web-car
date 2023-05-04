@@ -19,6 +19,23 @@ namespace CarRentalApi.Services.Repository
             _context = context;
         }
 
+        public async Task<Model> CreateOrUpdateModelAsync(Model model, CancellationToken cancellationToken = default)
+        {
+            if (model.Id > 0)
+                _context.Update(model);
+            else
+                _context.Add(model);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return model;
+        }
+
+        public async Task<bool> DeleteModelByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Model>()
+                            .Where(t => t.Id == id).ExecuteDeleteAsync(cancellationToken) > 0;        }
+
         public async Task<Model> GetModelByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _context.Set<Model>()
@@ -39,6 +56,12 @@ namespace CarRentalApi.Services.Repository
                     CarCount = x.CarList.Count(x => x.IsActived)
                 })
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<bool> IsModelSlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default)
+        {
+             return await _context.Set<Model>()
+                .AnyAsync(x => x.Id != id && x.UrlSlug == slug, cancellationToken);
         }
     }
 }
