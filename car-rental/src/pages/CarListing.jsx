@@ -29,10 +29,13 @@ const CarListing = () => {
   useEffect(() => {
     window.scrollTo(0, 50);
     (async () => {
+      console.log("Hello");
       try {
         let data = [];
         if (slug) {
+          console.log("🚀 ~ slug:", slug);
           data = await modelsApi.getCarByModelSlug(slug, filters);
+          console.log("🚀 ~ data:", data);
         } else {
           data = await carsApi.getAll(filters);
         }
@@ -68,17 +71,21 @@ const CarListing = () => {
     e.preventDefault();
 
     let value = {};
+
     if (modelId > 0) {
       value = {
         ...filters,
         SortColumn: sortColumn,
         SortOrder: sortOrder,
         Keyword: keyword,
-        ModelId: modelId,
+        ModelId: +modelId,
       };
       setFilters(value);
+      console.log("🚀 ~ handleSubmit ~ value:", value);
+
       return;
     }
+    console.log("hanlde on submit");
 
     value = {
       ...filters,
@@ -96,6 +103,7 @@ const CarListing = () => {
   };
 
   const handleUnFilter = () => {
+    console.log("Handle un filter");
     setKeyword("");
     setModelId(0);
     setSortOrder("ASC");

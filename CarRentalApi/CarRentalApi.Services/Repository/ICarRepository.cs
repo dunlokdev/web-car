@@ -33,5 +33,6 @@ namespace CarRentalApi.Services.Repository
         Task<bool> IsCarlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default);
         Task<Car> CreateOrUpdateCarAsync(Car car, CancellationToken cancellationToken= default);
         Task<bool> DeleteCarByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<IList<CommentDto>> GetCommentByIdCar(int id, CancellationToken cancellationToken = default);
     }
 }

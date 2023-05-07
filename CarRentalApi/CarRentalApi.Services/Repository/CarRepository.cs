@@ -154,5 +154,21 @@ namespace CarRentalApi.Services.Repository
             return await _context.Set<Car>()
                             .Where(t => t.Id == id).ExecuteDeleteAsync(cancellationToken) > 0;
         }
+
+        public async Task<IList<CommentDto>> GetCommentByIdCar(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Comment>()
+                .Where(x => x.CarId == id)
+                .Select(s => new CommentDto()
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    PostedDate = s.PostedDate,
+                    IsApproved = s.IsApproved,
+                    CarId = s.CarId,
+                })
+                .ToListAsync(cancellationToken);
+        }
     }
 }

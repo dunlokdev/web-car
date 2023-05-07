@@ -10,6 +10,7 @@ using CarRentalApi.WebApi.Models;
 using CarRentalApi.WebApi.Models.Car;
 using System.Net;
 using CarRentalApi.Services.Media;
+using CarRentalApi.WebApi.Models.Post;
 
 namespace CarRentalApi.WebApi.Endpoints
 {
@@ -44,7 +45,19 @@ namespace CarRentalApi.WebApi.Endpoints
                             .WithName("DeleteCar")
                             .Produces<ApiResponse<string>>();
 
+            routeGroupBuilder.MapGet("/comments/{id:int}", GetCommnentByCarId)
+                            .WithName("GetCommnentByCarId")
+                            .Produces<ApiResponse<IList<CommentDto>>>();
+
+
             return app;
+        }
+
+        private static async Task<IResult> GetCommnentByCarId(int id, IMapper mapper, ICarRepository repository) 
+        {
+            var comments = await repository.GetCommentByIdCar(id);
+
+            return Results.Ok(ApiResponse.Success(comments));
         }
 
         private static async Task<IResult> GetCarById(

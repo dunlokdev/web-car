@@ -19,5 +19,8 @@ var app = builder.Build();
     // Configure API Endpoint
     app.MapCarEndpoints();
     app.MapModelEndpoints();
+    app.MapPostsEndpoints();
+    app.MapCommentEndpoints();
+
     app.Run();
 }
