@@ -14,17 +14,15 @@ namespace CarRentalApi.Data.Contexts
     public class CarDbContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
-
         public DbSet<Galery> Galeries { get; set; }
-
         public DbSet<Model> Models { get; set; }
-
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<OrderDetails> OrderDetails { get; set; }
-
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public CarDbContext ()
         {

@@ -4,6 +4,7 @@ using CarRentalApi.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using CarRentalApi.Core.Contracts;
 using CarRentalApi.Services.Extentions;
+using Azure;
 
 namespace CarRentalApi.Services.Repository
 {
@@ -123,9 +124,49 @@ namespace CarRentalApi.Services.Repository
                 .Where(x => x.CarId == id)
                 .Select(x => new GaleryDto()
                 {
-                    Id  = x.Id,
+                    Id = x.Id,
                     CarId = x.CarId,
                     Thumbnail = x.Thumbnail
+                })
+                .ToListAsync(cancellationToken);
+        }
+        public async Task<bool> IsCarlugExistedAsync(int id, string slug, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Car>()
+                .AnyAsync(x => x.Id != id && x.UrlSlug == slug, cancellationToken);
+        }
+
+        public async Task<Car> CreateOrUpdateCarAsync(Car car, CancellationToken cancellationToken = default)
+        {
+            if (car.Id > 0)
+                _context.Update(car);
+            else
+                _context.Add(car);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return car;
+
+        }
+
+        public async Task<bool> DeleteCarByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Car>()
+                            .Where(t => t.Id == id).ExecuteDeleteAsync(cancellationToken) > 0;
+        }
+
+        public async Task<IList<CommentDto>> GetCommentByIdCar(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Comment>()
+                .Where(x => x.CarId == id)
+                .Select(s => new CommentDto()
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    PostedDate = s.PostedDate,
+                    IsApproved = s.IsApproved,
+                    CarId = s.CarId,
                 })
                 .ToListAsync(cancellationToken);
         }

@@ -32,5 +32,6 @@ namespace CarRentalApi.Core.Entities
         public IList<Galery> Galery { get; set; }
         public Model Model { get; set; }
         public IList<OrderDetails> OrderDetails { get; set; }
+        public IList<Comment> Comments { get; set; }
     }
 }

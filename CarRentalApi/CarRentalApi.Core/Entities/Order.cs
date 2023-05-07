@@ -21,6 +21,5 @@ namespace CarRentalApi.Core.Entities
         public double TotalMoney { get; set; }
         public User User { get; set; } = null;
         public IList<OrderDetails> OrderDetails { get; set; }
-
     }
 }

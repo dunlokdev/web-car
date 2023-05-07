@@ -4,10 +4,13 @@ using CarRentalApi.Services.Repository;
 using CarRentalApi.WebApi.Models.Cars;
 using MapsterMapper;
 using Mapster;
+using SlugGenerator;
 using CarRentalApi.Core.Collections;
 using CarRentalApi.WebApi.Models;
 using CarRentalApi.WebApi.Models.Car;
 using System.Net;
+using CarRentalApi.Services.Media;
+using CarRentalApi.WebApi.Models.Post;
 
 namespace CarRentalApi.WebApi.Endpoints
 {
@@ -33,7 +36,28 @@ namespace CarRentalApi.WebApi.Endpoints
                            .WithName("GetCarBySlug")
                            .Produces<ApiResponse<CarDto>>();
 
+            routeGroupBuilder.MapPost("/", AddCar)
+                              .WithName("AddCar")
+                              .Accepts<CarEditModel>("multipart/form-data")
+                              .Produces(401)
+                              .Produces<ApiResponse<CarDto>>();
+            routeGroupBuilder.MapDelete("/{id:int}", DeleteCar)
+                            .WithName("DeleteCar")
+                            .Produces<ApiResponse<string>>();
+
+            routeGroupBuilder.MapGet("/comments/{id:int}", GetCommnentByCarId)
+                            .WithName("GetCommnentByCarId")
+                            .Produces<ApiResponse<IList<CommentDto>>>();
+
+
             return app;
+        }
+
+        private static async Task<IResult> GetCommnentByCarId(int id, IMapper mapper, ICarRepository repository) 
+        {
+            var comments = await repository.GetCommentByIdCar(id);
+
+            return Results.Ok(ApiResponse.Success(comments));
         }
 
         private static async Task<IResult> GetCarById(
@@ -91,5 +115,93 @@ namespace CarRentalApi.WebApi.Endpoints
 
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
+
+        private static async Task<IResult> AddCar(
+              HttpContext context,
+              IMapper mapper,
+              ICarRepository repository,
+              IMediaManager mediaManager)
+        {
+
+            var model = await CarEditModel.BindAsync(context);
+            var slug = model.Name.GenerateSlug();
+            if (await repository.IsCarlugExistedAsync(model.Id, slug))
+            {
+                return Results.Ok(ApiResponse.Fail(HttpStatusCode.Conflict, $"Slug '{slug}' đã được sử dụng cho xe khác rồi"));
+            }
+
+            var car = model.Id > 0 ? await repository.GetCarByIdAsync(model.Id, true) : null;
+
+            if (car == null)
+            {
+                car = new Car()
+                {
+                    CreatedAt = DateTime.Now,
+                };
+            }
+
+            //- ID
+            //- ModelID
+            //- Name
+            //- Price (\*)
+            //- Discount
+            //- Thumbnail
+            //- ShortDescripton
+            //- Description
+            //- UrlSlug
+            //- IsActived
+            //- Wattage: Công xuất (\*)
+            //- Torque: Mô men xoắn (\*)
+            //- SpeedUp: Tăng tốc từ 0 - 100km (0 - 62 dặm) (\*)
+            //- MaxSpeed: Tốc độ tối đa (\*)
+            //- Consume: Lượng tiêu thụ
+            //- Emissions: Lượng khí thải
+            //- Evaluate: Đánh giá
+            //- CreateAt
+            //- UpdateAt
+
+            car.ModelId = model.ModelId;
+            car.Name = model.Name;
+            car.Price = model.Price;
+            car.Discount = model.Discount;
+            car.UrlSlug = slug;
+            car.ShortDescripton = model.ShortDescripton;
+            car.Description = model.Description;
+            car.IsActived = model.IsActived;
+            car.Wattage = model.Wattage;
+            car.Torque = model.Torque;
+            car.SpeedUp = model.SpeedUp;
+            car.MaxSpeed = model.MaxSpeed;
+            car.Consume = model.Consume;
+            car.Emission = model.Emission;
+            car.Evaluate = model.Evaluate;
+
+            car.UpdatedAt = DateTime.Now;
+
+            if (model.ImageFile?.Length > 0)
+            {
+                string hostname = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.PathBase}/";
+                var uploadedPath = await mediaManager.SaveFileAsync(
+                    model.ImageFile.OpenReadStream(),
+                    model.ImageFile.FileName,
+                    model.ImageFile.ContentType);
+
+                if (!string.IsNullOrWhiteSpace(uploadedPath))
+                {
+                    car.Thumbnail = hostname + uploadedPath;
+                }
+            }
+            await repository.CreateOrUpdateCarAsync(car);
+
+            return Results.Ok(ApiResponse.Success(mapper.Map<CarDto>(car), HttpStatusCode.Created));
+        }
+
+        private static async Task<IResult> DeleteCar(int id, ICarRepository blogRepository)
+        {
+            return await blogRepository.DeleteCarByIdAsync(id)
+                    ? Results.Ok(ApiResponse.Success($"Xóa thành công xe có Id = {id}"))
+                    : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy xe có Id = {id}"));
+        }
+
     }
 }

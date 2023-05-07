@@ -35,6 +35,10 @@ a {
   color: unset;
 }
 
+textarea {
+  resize: none;
+}
+
 a:hover {
   color: unset;
 }

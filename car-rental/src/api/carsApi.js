@@ -22,11 +22,25 @@ const carsApi = {
     return axiosClient.get(url);
   },
 
-  add(data) {},
+  addOrUpdate(data) {
+    const url = `/cars`;
+    return axiosClient.post(url, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
 
-  update(data) {},
+  getCommentByIdCar(id) {
+    // https://localhost:7044/api/cars/comments/10
+    const url = `cars/comments/${id}`;
+    return axiosClient.get(url);
+  },
 
-  remove(id) {},
+  // https://localhost:7044/api/cars/43
+  remove(id) {
+    const url = `/cars/${id}`;
+
+    return axiosClient.delete(url);
+  },
 };
 
 export default carsApi;

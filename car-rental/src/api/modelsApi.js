@@ -6,17 +6,30 @@ const modelsApi = {
     return axiosClient.get(url);
   },
 
+  getById(id) {
+    const url = `/model/${id}`;
+
+    return axiosClient.get(url);
+  },
+
   // https://localhost:7044/api/model/718/cars?PageSize=10&PageNumber=1
   getCarByModelSlug(slug, params) {
     const url = `model/${slug}/cars`;
     return axiosClient.get(url, { params });
   },
 
-  add(data) {},
+  addOrUpdate(data) {
+    const url = `/model`;
+    return axiosClient.post(url, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
 
-  update(data) {},
+  remove(id) {
+    const url = `/model/${id}`;
 
-  remove(id) {},
+    return axiosClient.delete(url);
+  },
 };
 
 export default modelsApi;
