@@ -1,13 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Col } from "reactstrap";
 import "../../styles/blog-item.css";
-import { Link } from "react-router-dom";
-import blogData from "../../assets/data/blogData";
 
-const BlogList = () => {
+const BlogList = ({ blogs }) => {
   return (
     <>
-      {blogData.map((item) => (
+      {blogs?.map((item) => (
         <BlogItem item={item} key={item.id} />
       ))}
     </>
@@ -15,20 +14,26 @@ const BlogList = () => {
 };
 
 const BlogItem = ({ item }) => {
-  const { imgUrl, title, author, date, description, time } = item;
+  const { id, imageUrl, title, author, postedDate, shortDescription, urlSlug } =
+    item;
+  console.log("🚀 ~ BlogItem ~ imgUrl:", imageUrl);
 
   return (
     <Col lg="4" md="6" sm="6" className="mb-5">
       <div className="blog__item">
-        <img src={imgUrl} alt="" className="w-100" />
+        <img
+          src={imageUrl || "https://placehold.co/600x400?text=Thumbnail"}
+          alt=""
+          className="w-100"
+        />
         <div className="blog__info p-3">
-          <Link to={`/blogs/${title}`} className="blog__title">
+          <Link to={`/blogs/${urlSlug}`} className="blog__title">
             {title}
           </Link>
           <p className="section__description mt-3">
-            {description.length > 100
-              ? description.substr(0, 100)
-              : description}
+            {shortDescription.length > 100
+              ? shortDescription.substr(0, 100)
+              : shortDescription}
           </p>
 
           <Link to={`/blogs/${title}`} className="read__more">
@@ -42,12 +47,12 @@ const BlogItem = ({ item }) => {
 
             <div className=" d-flex align-items-center gap-3">
               <span className=" d-flex align-items-center gap-1 section__description">
-                <i className="ri-calendar-line"></i> {date}
+                <i className="ri-calendar-line"></i> {postedDate}
               </span>
 
-              <span className=" d-flex align-items-center gap-1 section__description">
+              {/* <span className=" d-flex align-items-center gap-1 section__description">
                 <i className="ri-time-line"></i> {time}
-              </span>
+              </span> */}
             </div>
           </div>
         </div>

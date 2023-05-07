@@ -7,12 +7,6 @@ const quickLinks = [
     path: "/about",
     display: "About",
   },
-
-  {
-    path: "#",
-    display: "Privacy Policy",
-  },
-
   {
     path: "/cars",
     display: "Car Listing",
@@ -21,7 +15,6 @@ const quickLinks = [
     path: "/blogs",
     display: "Blog",
   },
-
   {
     path: "/contact",
     display: "Contact",
@@ -41,7 +34,7 @@ const Footer = () => {
                 <Link to="/home" className=" d-flex align-items-center gap-2">
                   <i className="ri-car-line"></i>
                   <span>
-                    Đà Lạt <br /> Auto
+                    Porsche <br /> Đà Lạt
                   </span>
                 </Link>
               </h1>
@@ -56,7 +49,7 @@ const Footer = () => {
 
           <Col lg="2" md="4" sm="6">
             <div className="mb-4">
-              <h5 className="footer__link-title">Quick Links</h5>
+              <h5 className="footer__link-title">Truy cập nhanh</h5>
               <ListGroup>
                 {quickLinks.map((item, index) => (
                   <ListGroupItem key={index} className="p-0 mt-3 quick__link">
@@ -81,8 +74,10 @@ const Footer = () => {
 
           <Col lg="3" md="4" sm="12">
             <div className="mb-4">
-              <h5 className="footer__link-title">Newsletter</h5>
-              <p className="section__description">Subscribe our newsletter</p>
+              <h5 className="footer__link-title">
+                Đăng ký để nhận tin sớm nhất
+              </h5>
+              <p className="section__description">Email của bạn</p>
               <div className="newsletter">
                 <input type="email" placeholder="Email" />
                 <span>

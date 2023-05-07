@@ -3,6 +3,7 @@ import { Col, Container, Row } from "reactstrap";
 import "../../styles/become-driver.css";
 
 import driverImg from "../../assets/all-images/cars-img/car-6.png";
+import { Link } from "react-router-dom";
 
 const BecomeDriverSection = () => {
   return (
@@ -18,9 +19,9 @@ const BecomeDriverSection = () => {
               Chúng tôi đặt ra những tiêu chuẩn cao cấp.
             </h2>
 
-            <button className="btn become__driver-btn mt-4">
+            <Link to={`/about`} className="btn become__driver-btn mt-4">
               Hãy chọn chúng tôi
-            </button>
+            </Link>
           </Col>
         </Row>
       </Container>

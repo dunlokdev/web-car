@@ -6,26 +6,28 @@ import modelsApi from "../api/modelsApi";
 import Helmet from "../components/Helmet/Helmet";
 import CarItem from "../components/UI/CarItem";
 import CommonSection from "../components/UI/CommonSection";
+import Pager from "../components/UI/Pager";
 
 const CarListing = () => {
   const { slug } = useParams();
 
   // State
   const [carList, setCarList] = useState([]);
+  const [metadata, setMetadata] = useState([]);
   const [models, setModels] = useState([]);
   const [filters, setFilters] = useState({
-    PageSize: 10,
+    PageSize: 6,
     PageNumber: 1,
-    SortColumn: "Name",
-    SortOrder: "ASC",
   });
 
   const [keyword, setKeyword] = useState("");
+  const [sortOrder, setSortOrder] = useState("ASC");
+  const [sortColumn, setSortColumn] = useState("Name");
+  const [modelId, setModelId] = useState(0);
 
   // Effect
   useEffect(() => {
-    window.scrollTo(0, 0);
-
+    window.scrollTo(0, 50);
     (async () => {
       try {
         let data = [];
@@ -44,6 +46,7 @@ const CarListing = () => {
         });
 
         setModels(models);
+        setMetadata(data.result.metadata);
         setCarList(data.result.items);
       } catch (error) {}
     })();
@@ -57,30 +60,55 @@ const CarListing = () => {
       sortOrder = "ASC";
     }
 
-    setFilters({ ...filters, SortColumn: sortColumn, SortOrder: sortOrder });
+    setSortOrder(sortOrder);
+    setSortColumn(sortColumn);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setFilters({ ...filters, Keyword: keyword });
-    setKeyword("");
-  };
-
-  const handleModelChange = (e) => {
-    if (!e.target.value) {
-      setFilters({ ...filters });
+    let value = {};
+    if (modelId > 0) {
+      value = {
+        ...filters,
+        SortColumn: sortColumn,
+        SortOrder: sortOrder,
+        Keyword: keyword,
+        ModelId: modelId,
+      };
+      setFilters(value);
       return;
     }
-    const slug = e.target.value;
 
-    (async () => {
-      const data = await modelsApi.getCarByModelSlug(slug, {
-        PageSize: 100,
-        PageNumber: 1,
-      });
-      setCarList(data.result.items);
-    })();
+    value = {
+      ...filters,
+      SortColumn: sortColumn,
+      SortOrder: sortOrder,
+      Keyword: keyword,
+    };
+    console.log("🚀 ~ handleSubmit ~ value:", value);
+
+    setFilters(value);
+  };
+
+  const handlePageChange = (value) => {
+    setFilters({ ...filters, PageNumber: value });
+  };
+
+  const handleUnFilter = () => {
+    setKeyword("");
+    setModelId(0);
+    setSortOrder("ASC");
+    setSortColumn("Name");
+
+    const value = {
+      ...filters,
+      SortColumn: sortColumn,
+      SortOrder: sortOrder,
+      Keyword: keyword,
+      ModelId: modelId,
+    };
+    setFilters(value);
   };
 
   return (
@@ -95,42 +123,45 @@ const CarListing = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <div className=" d-flex align-items-center gap-3 mb-5">
-                <span className=" d-flex align-items-center gap-2">
-                  <i className="ri-sort-asc"></i> Sắp xếp theo
-                </span>
+              <form onSubmit={handleSubmit}>
+                <div className=" d-flex align-items-center gap-3 mb-5">
+                  <span className=" d-flex align-items-center gap-2">
+                    <i className="ri-sort-asc"></i> Sắp xếp theo
+                  </span>
 
-                <select
-                  style={{ width: "150px" }}
-                  className="form-select"
-                  onChange={handleChange}
-                >
-                  <option value=""> A-Z </option>
-                  <option value="ASC">Thấp đến cao</option>
-                  <option value="DESC">Cao đến thấp</option>
-                </select>
+                  <select
+                    className="form-select"
+                    onChange={handleChange}
+                    style={{ width: "150px" }}
+                    value={sortOrder}
+                  >
+                    <option value=""> A-Z </option>
+                    <option value="ASC">Thấp đến cao</option>
+                    <option value="DESC">Cao đến thấp</option>
+                  </select>
 
-                <span className="d-flex align-items-center gap-2">
-                  <i className="ri-car-line"></i> Dòng xe
-                </span>
-                <select
-                  title="Dòng xe"
-                  name="authorId"
-                  style={{ width: "150px" }}
-                  className="form-select"
-                  onChange={handleModelChange}
-                  value={slug ? slug : ""}
-                >
-                  <option value="">Tất cả</option>
-                  {models.map((item) => (
-                    <option key={item.id} value={item.urlSlug}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
+                  <span className="d-flex align-items-center gap-2">
+                    <i className="ri-car-line"></i> Dòng xe
+                  </span>
+                  <select
+                    title="Dòng xe"
+                    name="ModelId"
+                    style={{ width: "150px" }}
+                    className="form-select"
+                    value={modelId}
+                    onChange={(e) => {
+                      setModelId(e.target.value);
+                    }}
+                  >
+                    <option value="">Tất cả</option>
+                    {models.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
 
-                <form onSubmit={handleSubmit}>
-                  <div className="input-group">
+                  <div className="input-group w-25">
                     <div className="form-control">
                       <input
                         style={{ outline: "none", border: "none" }}
@@ -140,12 +171,17 @@ const CarListing = () => {
                         onChange={(e) => setKeyword(e.target.value)}
                       />
                     </div>
-                    <button type="submit" className="btn btn-sm">
-                      <i className="ri-search-line"></i>
-                    </button>
                   </div>
-                </form>
-              </div>
+
+                  <button type="submit" className="btn btn-sm">
+                    Lọc
+                  </button>
+
+                  <button className="btn btn-sm" onClick={handleUnFilter}>
+                    Bỏ lọc
+                  </button>
+                </div>
+              </form>
             </Col>
 
             {carList.length > 0 ? (
@@ -155,6 +191,8 @@ const CarListing = () => {
             ) : (
               <h2 className="section__title py-5">Không tìm thấy sản phẩm</h2>
             )}
+
+            <Pager metadata={metadata} handlePageChange={handlePageChange} />
           </Row>
         </Container>
       </section>

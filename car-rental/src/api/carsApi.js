@@ -29,6 +29,12 @@ const carsApi = {
     });
   },
 
+  getCommentByIdCar(id) {
+    // https://localhost:7044/api/cars/comments/10
+    const url = `cars/comments/${id}`;
+    return axiosClient.get(url);
+  },
+
   // https://localhost:7044/api/cars/43
   remove(id) {
     const url = `/cars/${id}`;

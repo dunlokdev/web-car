@@ -9,11 +9,22 @@ import CarItem from "../components/UI/CarItem";
 import HeroSlider from "../components/UI/HeroSlider";
 import ModelList from "../components/UI/ModelList";
 import modelsApi from "../api/modelsApi";
+import Loading from "../components/Loading/Loading";
+import postApi from "../api/postApi";
 
 const Home = () => {
   // State
   const [carList, setCarList] = useState([]);
   const [modelList, setModelList] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+
+  const [filtersBlog, setFiltersBlog] = useState({
+    Keyword: "",
+    PageSize: 10,
+    PageNumber: 1,
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({
     PageSize: 6,
     PageNumber: 1,
@@ -23,17 +34,22 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
         const data = await carsApi.getAll(filters);
         const modelResponse = await modelsApi.getAll();
-
+        const { result } = await postApi.getAll(filters);
+        setBlogs(result.items);
         setModelList(modelResponse.result);
         setCarList(data.result.items);
+        setIsLoading(false);
       } catch (error) {}
     })();
   }, [filters]);
 
   return (
     <div>
+      {isLoading && <Loading />}
+
       <Helmet title="Home">
         {/* =========== slider section ============= */}
         <section className="p-0 hero__slider-section">
@@ -83,7 +99,7 @@ const Home = () => {
                 </h6>
                 <h2 className="section__title">Blog mới nhất</h2>
               </Col>
-              <BlogList />
+              <BlogList blogs={blogs} />
             </Row>
           </Container>
         </section>

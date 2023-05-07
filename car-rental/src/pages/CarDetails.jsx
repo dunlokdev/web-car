@@ -7,11 +7,14 @@ import carsApi from "../api/carsApi";
 import Helmet from "../components/Helmet/Helmet";
 import Galery from "../components/UI/Galery";
 import "../styles/car-detail.css";
+import Comment from "../components/UI/Comment";
+import commentApi from "../api/commentApi";
 
 const CarDetails = () => {
   const { slug } = useParams();
 
   const [car, setCar] = useState({});
+  const [comments, setComments] = useState([]);
   const [galeries, setGaleries] = useState([]);
 
   useEffect(() => {
@@ -22,11 +25,36 @@ const CarDetails = () => {
         setCar(data.result);
         const galeriesData = await carsApi.getGaleriesByCarId(data.result.id);
         setGaleries(galeriesData.result);
+
+        const commentsData = await carsApi.getCommentByIdCar(data.result.id);
+        setComments(commentsData.result);
       } catch (error) {
         console.log("An error occurred, ", error);
       }
     })();
   }, [slug]);
+
+  const handleOnSubmit = (value) => {
+    console.log("🚀 ~ handleOnSubmit ~ value:", value);
+    (async () => {
+      // {
+      //   "name": "Nga Nga",
+      //   "description": "Xe này đẹp quá",
+      //   "isApproved": true,
+      //   "carId": 1
+      // }
+      const data = {
+        ...value,
+        isApproved: true,
+        carId: car.id,
+      };
+      const response = await commentApi.add(data);
+      const commentsData = await carsApi.getCommentByIdCar(car.id);
+      console.log("🚀 ~ commentsData:", commentsData);
+      setComments(commentsData.result);
+      console.log("🚀 ~ response:", response);
+    })();
+  };
 
   return (
     <Helmet title={car?.name}>
@@ -51,17 +79,20 @@ const CarDetails = () => {
                   <h6 className="rent__price fw-bold fs-4">
                     ${GetCurrency(car?.price)}
                   </h6>
-
-                  <span className=" d-flex align-items-center gap-2">
-                    <span style={{ color: "#f9a826" }}>
-                      <i className="ri-star-s-fill"></i>
-                      <i className="ri-star-s-fill"></i>
-                      <i className="ri-star-s-fill"></i>
-                      <i className="ri-star-s-fill"></i>
-                      <i className="ri-star-s-fill"></i>
+                  {car?.evaluate !== 0 ? (
+                    <span className=" d-flex align-items-center gap-2">
+                      <span style={{ color: "#f9a826" }}>
+                        <i className="ri-star-s-fill"></i>
+                        <i className="ri-star-s-fill"></i>
+                        <i className="ri-star-s-fill"></i>
+                        <i className="ri-star-s-fill"></i>
+                        <i className="ri-star-s-fill"></i>
+                      </span>
+                      {car?.evaluate} ratings
                     </span>
-                    ({car?.evaluate} ratings)
-                  </span>
+                  ) : (
+                    <span>{car?.evaluate} ratings</span>
+                  )}
                 </div>
 
                 <p className="section__description">{car?.description}</p>
@@ -91,7 +122,7 @@ const CarDetails = () => {
                       className="ri-timer-flash-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {car?.speedUp} giây
+                    Tăng tốc từ 1 - 100km/h là {car?.speedUp} giây
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -121,6 +152,8 @@ const CarDetails = () => {
               </div>
             </Col>
           </Row>
+
+          <Comment comments={comments} handleOnSubmit={handleOnSubmit} />
         </Container>
       </section>
     </Helmet>
