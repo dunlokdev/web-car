@@ -7,6 +7,7 @@
         <a href=""><img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" style="width: 150px; object-fit: cover" /></a><br>
     </b>
 </h1>
+
 ### Hướng dẫn chạy dự án
 
 #### 1. Setup Backend API (ASP.Net Core 7)
